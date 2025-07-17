@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Saugat Panta | Blogs</title>
 <style>
-  /* You can reuse your styles from index.html or link a CSS file */
+  /* Reuse your styles */
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -29,6 +29,42 @@
   nav a:hover {
     color: #F25C54;
   }
+
+  /* Animated text styles */
+  .animated-text {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 600px;
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #004E64;
+    margin-top: 3rem;
+  }
+  .animated-text span {
+    opacity: 0;
+    animation: fadeInUp 0.5s forwards;
+  }
+  /* Each word's animation delay */
+  .animated-text span:nth-child(1) { animation-delay: 0.3s; }
+  .animated-text span:nth-child(2) { animation-delay: 0.8s; }
+  .animated-text span:nth-child(3) { animation-delay: 1.3s; }
+  .animated-text span:nth-child(4) { animation-delay: 1.8s; }
+  .animated-text span:nth-child(5) { animation-delay: 2.3s; }
+  .animated-text span:nth-child(6) { animation-delay: 2.8s; }
+  .animated-text span:nth-child(7) { animation-delay: 3.3s; }
+  .animated-text span:nth-child(8) { animation-delay: 3.8s; }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>
 </head>
 <body>
@@ -44,8 +80,16 @@
 
 <main>
   <h2>Blogs</h2>
-  <p>This page will contain your blog posts and medical reflections.</p>
-  <!-- You can add blog post summaries or links here -->
+  <div class="animated-text">
+    <span>Blogs</span>
+    <span>will</span>
+    <span>be</span>
+    <span>uploaded</span>
+    <span>here</span>
+    <span>soon.</span>
+    <span>Keep</span>
+    <span>checking!</span>
+  </div>
 </main>
 
 </body>
