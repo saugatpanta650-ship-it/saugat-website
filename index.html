@@ -14,6 +14,7 @@
     --text-main: #2D2D2D;
     --text-muted: #7D8B91;
     --border: #E2DCD3;
+    --transition-time: 0.4s;
   }
   * {
     box-sizing: border-box;
@@ -25,6 +26,7 @@
     background: var(--background);
     color: var(--text-main);
     line-height: 1.6;
+    scroll-behavior: smooth;
   }
   header {
     background: var(--primary);
@@ -37,10 +39,13 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   }
   header h1 {
     margin: 0;
     font-size: 1.8rem;
+    letter-spacing: 1.5px;
+    font-weight: 700;
   }
   nav {
     margin-top: 0.5rem;
@@ -51,32 +56,58 @@
     margin-left: 1.5rem;
     font-weight: 600;
     font-size: 1rem;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color var(--transition-time);
+  }
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: width var(--transition-time);
   }
   nav a:hover,
   nav a:focus {
     color: var(--secondary);
   }
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
+  }
   main {
     max-width: 900px;
-    margin: 2rem auto;
+    margin: 3rem auto 4rem;
     background: white;
     padding: 2rem 3rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    border-radius: 12px;
     border: 1px solid var(--border);
   }
   section {
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
   h2 {
     border-bottom: 3px solid var(--primary);
     padding-bottom: 0.3rem;
     margin-bottom: 1rem;
     color: var(--primary);
+    font-weight: 700;
   }
   h3 {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     color: var(--secondary);
+    font-weight: 600;
   }
   ul {
     list-style: none;
@@ -84,16 +115,21 @@
   }
   li {
     margin-bottom: 0.6rem;
+    line-height: 1.5;
   }
   a {
     color: var(--primary);
     text-decoration: none;
+    font-weight: 600;
+    transition: color var(--transition-time);
   }
   a:hover {
     text-decoration: underline;
+    color: var(--secondary);
   }
   .contact-info p {
-    margin: 0.3rem 0;
+    margin: 0.4rem 0;
+    font-weight: 600;
   }
   .small-text {
     font-size: 0.9rem;
@@ -111,7 +147,8 @@
   }
   /* Contact form styling */
   form {
-    max-width: 400px;
+    max-width: 450px;
+    margin-top: 1rem;
   }
   label {
     display: block;
@@ -120,21 +157,29 @@
   }
   input, textarea {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.6rem 0.8rem;
     margin-bottom: 1rem;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 1rem;
     font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+  input:focus, textarea:focus {
+    border-color: var(--secondary);
+    outline: none;
+    box-shadow: 0 0 6px var(--secondary);
   }
   button {
     background: var(--primary);
     color: white;
     border: none;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    border-radius: 4px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
     cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
   }
   button:hover {
     background: var(--secondary);
@@ -147,7 +192,7 @@
     }
     nav a {
       margin-left: 1rem;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
   }
 </style>
@@ -189,7 +234,6 @@
     <ul>
       <li><strong>Address:</strong>  Lamjung</li>
       <li><strong>Email:</strong> <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></li>
-     
       <li><strong>Date of Birth:</strong> March 31, 2003</li>
       <li><strong>Instagram:</strong> <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></li>
     </ul>
@@ -234,23 +278,22 @@
     </ul>
   </section>
 
-  </p>
-  <ul>
-    <li><strong>TRADING INSIGHTS that will be uploaded here:</strong></li>
-    <li><strong>Trading Analysis</strong></li>
-    <li><strong>Investment Analysis</strong></li>
-    <li><strong>Finance Management</strong></li>
-    <li><strong>Company Report Analysis</strong></li>
-    <li><strong>Portfolio Management Techniques</strong></li>
-  </ul>
-</section>
+  <section id="trading" tabindex="-1">
+    <h2>Trading Insights</h2>
+    <ul>
+      <li><strong>Trading Analysis</strong></li>
+      <li><strong>Investment Analysis</strong></li>
+      <li><strong>Finance Management</strong></li>
+      <li><strong>Company Report Analysis</strong></li>
+      <li><strong>Portfolio Management Techniques</strong></li>
+    </ul>
+  </section>
 
   <section id="contact" tabindex="-1">
     <h2>Contact Me</h2>
     <p>If you want to reach out, please send an email or message via Instagram.</p>
     <div class="contact-info">
       <p>Email: <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></p>
-      </p>
       <p>Instagram: <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></p>
     </div>
 
@@ -265,6 +308,24 @@
     </form>
   </section>
 </main>
+
+<script>
+  // Fade-in animation on scroll for sections
+  function revealOnScroll() {
+    const sections = document.querySelectorAll('section');
+    const windowHeight = window.innerHeight;
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if(top < windowHeight - 100) {
+        section.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+
+  // Optional: Smooth scroll polyfill handled by CSS scroll-behavior: smooth
+</script>
 
 </body>
 </html>
