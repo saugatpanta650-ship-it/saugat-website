@@ -3,328 +3,66 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Saugat Panta | Personal Website</title>
-<style>
-  :root {
-    --background: #FDF8F3;
-    --primary: #004E64;
-    --secondary: #F25C54;
-    --success: #719949;
-    --danger: #B33030;
-    --text-main: #2D2D2D;
-    --text-muted: #7D8B91;
-    --border: #E2DCD3;
-    --transition-time: 0.4s;
-  }
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    margin: 0;
-    background: var(--background);
-    color: var(--text-main);
-    line-height: 1.6;
-    scroll-behavior: smooth;
-  }
-  header {
-    background: var(--primary);
-    color: white;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
-  header h1 {
-    margin: 0;
-    font-size: 1.8rem;
-    letter-spacing: 1.5px;
-    font-weight: 700;
-  }
-  nav {
-    margin-top: 0.5rem;
-  }
-  nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 1.5rem;
-    font-weight: 600;
-    font-size: 1rem;
-    position: relative;
-    padding-bottom: 2px;
-    transition: color var(--transition-time);
-  }
-  nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background: var(--secondary);
-    transition: width var(--transition-time);
-  }
-  nav a:hover,
-  nav a:focus {
-    color: var(--secondary);
-  }
-  nav a:hover::after,
-  nav a:focus::after {
-    width: 100%;
-  }
-  main {
-    max-width: 900px;
-    margin: 3rem auto 4rem;
-    background: white;
-    padding: 2rem 3rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-  }
-  section {
-    margin-bottom: 5rem;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-  section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  h2 {
-    border-bottom: 3px solid var(--primary);
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
-    color: var(--primary);
-    font-weight: 700;
-  }
-  h3 {
-    margin-top: 2rem;
-    color: var(--secondary);
-    font-weight: 600;
-  }
-  ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  li {
-    margin-bottom: 0.6rem;
-    line-height: 1.5;
-  }
-  a {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color var(--transition-time);
-  }
-  a:hover {
-    text-decoration: underline;
-    color: var(--secondary);
-  }
-  .contact-info p {
-    margin: 0.4rem 0;
-    font-weight: 600;
-  }
-  .small-text {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-  }
-  /* Trading insights styling */
-  .news-article {
-    border-left: 4px solid var(--primary);
-    padding-left: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .news-article h4 {
-    margin: 0 0 0.3rem 0;
-    color: var(--secondary);
-  }
-  /* Contact form styling */
-  form {
-    max-width: 450px;
-    margin-top: 1rem;
-  }
-  label {
-    display: block;
-    margin-bottom: 0.3rem;
-    font-weight: 600;
-  }
-  input, textarea {
-    width: 100%;
-    padding: 0.6rem 0.8rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
-  }
-  input:focus, textarea:focus {
-    border-color: var(--secondary);
-    outline: none;
-    box-shadow: 0 0 6px var(--secondary);
-  }
-  button {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 0.7rem 1.5rem;
-    font-size: 1.1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-  }
-  button:hover {
-    background: var(--secondary);
-  }
-  /* Responsive */
-  @media (max-width: 600px) {
-    main {
-      padding: 1.5rem 1.5rem;
-      margin: 1rem;
-    }
-    nav a {
-      margin-left: 1rem;
-      font-size: 0.95rem;
-    }
-  }
-</style>
+<title>Saugat Panta | Home</title>
+<link rel="stylesheet" href="style.css" />
+<!-- Font Awesome for social icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <header>
   <h1>Saugat Panta</h1>
   <nav aria-label="Main navigation">
-    <a href="#home">Home</a>
-    <a href="#about">About Me</a>
-    <a href="#cv">CV</a>
-    <a href="#trading">Trading Insights</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="cv.html">CV</a>
+    <a href="trading.html">Trading Insights</a>
+    <a href="contact.html">Contact</a>
   </nav>
 </header>
 
 <main>
   <section id="home" tabindex="-1">
     <h2>Welcome</h2>
-    <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance.
-   This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts!
-    On this website, you can also explore my professional background and get insights into trading and investment strategies.  
-    Feel free to browse around!</p>
-  </section>
+    <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance. This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts! On this website, you can also explore my professional background and get insights into trading and investment strategies. Feel free to browse around!</p>
 
-  <section id="about" tabindex="-1">
-    <h2>About Me</h2>
-    <p>
-      I’m Saugat Panta, a second-year MBBS student at Gandaki Medical College.  
-      I’m deeply interested in the field of medicine, especially research, and continuously learning to become a better future physician.
-    </p>
-  </section>
-
-  <section id="cv" tabindex="-1">
-    <h2>Curriculum Vitae</h2>
-
-    <h3>Personal Information</h3>
-    <ul>
-      <li><strong>Address:</strong>  Lamjung</li>
-      <li><strong>Email:</strong> <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></li>
-      <li><strong>Date of Birth:</strong> March 31, 2003</li>
-      <li><strong>Instagram:</strong> <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></li>
-    </ul>
-
-    <h3>Education</h3>
-    <ul>
-      <li><strong>MBBS</strong> — Gandaki Medical College, Pokhara (2023 – Present)</li>
-      <li><strong>+2 </strong> — Kathmandu Model Secondary School, Kathmandu</li>
-      <li><strong>SEE</strong> — Future Star High School, Lamjung (2019)</li>
-    </ul>
-
-    <h3>Experience & Activities</h3>
-    <ul>
-      <li>
-        <strong>Community Health Diagnosis Research</strong><br />
-        Gandaki Medical College – Department of Community Medicine<br />
-        Location: Bhorletar, Lamjung<br />
-        1st Year MBBS (2023–24)<br />
-        Participated in a structured field-based research project under the Community Health Diagnosis curriculum. Conducted data collection, analysis, and reporting on key health indicators in the rural community of Bhorletar. Developed practical skills in epidemiology, public health assessment, and community engagement.
-      </li>
-    </ul>
-
-    <h3>Languages</h3>
-    <ul>
-      <li>Nepali (Native)</li>
-      <li>English (Intermediate)</li>
-      <li>Hindi (Conversational)</li>
-    </ul>
-
-    <h3>Career Interests</h3>
-    <ul>
-      <li>Pursuing a career in medicine with a focus on clinical practice and medical research.</li>
-      <li>Keen interest in community health and epidemiology.</li>
-      <li>Exploring trading research, especially in the Nepal Stock Exchange (NEPSE), including market analysis and investment strategies.</li>
-    </ul>
-
-    <h3>Hobbies & Interests</h3>
-    <ul>
-      <li>Reading medical journals and staying updated with medical research.</li>
-      <li>Following trends and developments in the Nepal Stock Exchange (NEPSE).</li>
-      <li>Exploring new skills and knowledge in both medicine and finance.</li>
-    </ul>
-  </section>
-
-  <section id="trading" tabindex="-1">
-    <h2>Trading Insights</h2>
-    <ul>
-      <li><strong>Trading Analysis</strong></li>
-      <li><strong>Investment Analysis</strong></li>
-      <li><strong>Finance Management</strong></li>
-      <li><strong>Company Report Analysis</strong></li>
-      <li><strong>Portfolio Management Techniques</strong></li>
-    </ul>
-  </section>
-
-  <section id="contact" tabindex="-1">
-    <h2>Contact Me</h2>
-    <p>If you want to reach out, please send an email or message via Instagram.</p>
-    <div class="contact-info">
-      <p>Email: <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></p>
-      <p>Instagram: <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></p>
+    <!-- Social media -->
+    <div class="social-icons" aria-label="Social media links">
+      <a href="https://www.facebook.com/saugatpanta" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/saugatpanta_/" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://twitter.com/saugatpanta" target="_blank" rel="noopener noreferrer" class="twitter" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/saugatpanta" target="_blank" rel="noopener noreferrer" class="linkedin" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
     </div>
-
-    <form onsubmit="alert('Thank you for reaching out! Please contact me via email or Instagram.'); return false;">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" placeholder="Your name" required />
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" placeholder="Your email" required />
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" rows="4" placeholder="Your message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
   </section>
 </main>
 
 <script>
-  // Fade-in animation on scroll for sections
-  function revealOnScroll() {
-    const sections = document.querySelectorAll('section');
-    const windowHeight = window.innerHeight;
-    sections.forEach(section => {
-      const top = section.getBoundingClientRect().top;
-      if(top < windowHeight - 100) {
-        section.classList.add('visible');
-      }
-    });
-  }
-  window.addEventListener('scroll', revealOnScroll);
-  window.addEventListener('load', revealOnScroll);
+  // Page fade-in effect
+  window.addEventListener('load', () => {
+    document.body.classList.add('visible');
+    document.querySelector('main').classList.add('visible');
+  });
 
-  // Optional: Smooth scroll polyfill handled by CSS scroll-behavior: smooth
+  // Page transition fade-out on link click
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', e => {
+      if (link.classList.contains('active')) return; // no action on current page link
+      e.preventDefault();
+      document.body.classList.remove('visible');
+      document.querySelector('main').classList.remove('visible');
+      setTimeout(() => {
+        window.location.href = link.href;
+      }, 400);
+    });
+  });
 </script>
 
 </body>

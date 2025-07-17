@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Saugat Panta | About Me</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <h1>Saugat Panta</h1>
+  <nav aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About Me</a>
+    <a href="cv.html">CV</a>
+    <a href="trading.html">Trading Insights</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section id="about" tabindex="-1">
+    <h2>About Me</h2>
+    <p>
+      I’m Saugat Panta, a second-year MBBS student at Gandaki Medical College. I’m deeply interested in the field of medicine, especially research, and continuously learning to become a better future physician.
+    </p>
+  </section>
+</main>
+
+<script>
+  window.addEventListener('load', () => {
+    document.body.classList.add('visible');
+    document.querySelector('main').classList.add('visible');
+  });
+
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', e => {
+      if (link.classList.contains('active')) return;
+      e.preventDefault();
+      document.body.classList.remove('visible');
+      document.querySelector('main').classList.remove('visible');
+      setTimeout(() => {
+        window.location.href = link.href;
+      }, 400);
+    });
+  });
+</script>
+
+</body>
+</html>
