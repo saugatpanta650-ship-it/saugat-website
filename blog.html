@@ -1,0 +1,122 @@
+<!-- blogs.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blogs | Saugat Panta</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fffbe6, #f0faff);
+      animation: fadeIn 1s ease-in;
+    }
+    .blog-message {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      padding: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #333;
+      text-align: center;
+      max-width: 700px;
+      margin: 2rem auto;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Saugat Panta</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blogs.html" class="active">Blogs</a>
+      <a href="research.html">Research</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2 style="color:#004E64">My Blogs</h2>
+    <div class="blog-message">
+      I’ll regularly post blog articles about medicine, student life, finance, and personal experiences. Just wait — I will upload here. Follow for more!
+    </div>
+  </main>
+</body>
+</html>
+
+
+<!-- research.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Research | Saugat Panta</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #e0f7fa, #ffffff);
+      animation: zoomIn 0.8s ease-out;
+    }
+    .research-entry {
+      background: #ffffffee;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-left: 6px solid #004E64;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease-in-out;
+    }
+    .research-entry:hover {
+      background: #f5fefc;
+      border-left-color: #F25C54;
+    }
+    .research-entry h3 {
+      margin: 0;
+      color: #004E64;
+    }
+    .research-entry p {
+      color: #333;
+      margin-top: 0.5rem;
+    }
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Saugat Panta</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="research.html" class="active">Research</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2 style="color:#004E64">Research Highlights</h2>
+    <div class="research-entry">
+      <h3>🔬 Community Health Diagnosis (Lamjung)</h3>
+      <p>Field-based public health research during 1st year MBBS in rural Nepal. Explored sanitation, disease prevalence, and family health practices in Bhorletar.</p>
+    </div>
+    <div class="research-entry">
+      <h3>🧪 Upcoming Clinical Research Project</h3>
+      <p>Collaborating with faculty at Gandaki Medical College to analyze early diagnostic signs of respiratory infections in Western Nepal. Study design underway.</p>
+    </div>
+  </main>
+</body>
+</html>
