@@ -90,18 +90,64 @@
   section {
     margin-bottom: 5rem;
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
   section.visible {
     opacity: 1;
     transform: translateY(0);
   }
+  /* Animate h2 heading inside visible section */
+  section.visible h2 {
+    animation: slideInLeftBounce 0.8s forwards;
+    color: var(--primary);
+    text-shadow: 0 0 8px var(--secondary);
+  }
+  /* Animate other content inside section */
+  section.visible > *:not(h2) {
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+    animation-delay: 0.3s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes slideInLeftBounce {
+    0% {
+      opacity: 0;
+      transform: translateX(-150px);
+      color: var(--text-muted);
+      text-shadow: none;
+    }
+    60% {
+      opacity: 1;
+      transform: translateX(30px);
+      color: var(--secondary);
+      text-shadow: 0 0 10px var(--secondary);
+    }
+    80% {
+      transform: translateX(-10px);
+      color: var(--primary);
+      text-shadow: 0 0 6px var(--secondary);
+    }
+    100% {
+      transform: translateX(0);
+      color: var(--primary);
+      text-shadow: 0 0 8px var(--secondary);
+    }
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   h2 {
     border-bottom: 3px solid var(--primary);
     padding-bottom: 0.3rem;
     margin-bottom: 1rem;
-    color: var(--primary);
     font-weight: 700;
   }
   h3 {
@@ -135,28 +181,95 @@
     font-size: 0.9rem;
     color: var(--text-muted);
   }
+  /* Trading insights styling */
+  .news-article {
+    border-left: 4px solid var(--primary);
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .news-article h4 {
+    margin: 0 0 0.3rem 0;
+    color: var(--secondary);
+  }
+  /* Contact form styling */
+  form {
+    max-width: 450px;
+    margin-top: 1rem;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+  input:focus, textarea:focus {
+    border-color: var(--secondary);
+    outline: none;
+    box-shadow: 0 0 6px var(--secondary);
+  }
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background: var(--secondary);
+  }
+  /* Responsive */
+  @media (max-width: 600px) {
+    main {
+      padding: 1.5rem 1.5rem;
+      margin: 1rem;
+    }
+    nav a {
+      margin-left: 1rem;
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Clock and Calendar container styles */
   .clock-calendar-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     background: #fefefe;
-    padding: 1rem 2rem;
+    padding: 2rem 3rem;
     border: 2px dashed var(--secondary);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     animation: popIn 1s ease-in-out;
   }
   .clock {
-    font-size: 2rem;
+    font-size: 5rem;
     font-weight: bold;
     color: var(--primary);
-    margin-bottom: 0.5rem;
-    animation: pulse 1s infinite alternate;
+    margin-bottom: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0.05em;
+    animation: pulse 1.5s infinite alternate;
   }
   .calendar {
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     color: var(--text-muted);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.05em;
+    animation: glowText 3s ease-in-out infinite alternate;
   }
   @keyframes pulse {
     from { transform: scale(1); }
@@ -165,6 +278,16 @@
   @keyframes popIn {
     0% { transform: scale(0.9); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes glowText {
+    0% {
+      text-shadow: 0 0 5px var(--secondary);
+      color: var(--secondary);
+    }
+    100% {
+      text-shadow: 0 0 20px var(--secondary);
+      color: var(--primary);
+    }
   }
 </style>
 </head>
@@ -184,42 +307,46 @@
 </header>
 
 <main>
-  <div class="clock-calendar-container">
+  <!-- Clock and Calendar with cool animation -->
+  <div class="clock-calendar-container" aria-label="Nepali Time Clock and English Calendar">
     <div class="clock" id="nepaliClock">Loading Time...</div>
-    <div class="calendar" id="nepaliDate">Loading Date...</div>
+    <div class="calendar" id="englishDate">Loading Date...</div>
   </div>
 
   <section id="home" tabindex="-1">
     <h2>Welcome</h2>
     <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance.
-    This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts!
-    On this website, you can also explore my professional background and get insights into trading and investment strategies.
+   This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts!
+    On this website, you can also explore my professional background and get insights into trading and investment strategies.  
     Feel free to browse around!</p>
   </section>
 
   <section id="about" tabindex="-1">
     <h2>About Me</h2>
     <p>
-      I’m Saugat Panta, a second-year MBBS student at Gandaki Medical College.
+      I’m Saugat Panta, a second-year MBBS student at Gandaki Medical College.  
       I’m deeply interested in the field of medicine, especially research, and continuously learning to become a better future physician.
     </p>
   </section>
 
   <section id="cv" tabindex="-1">
     <h2>Curriculum Vitae</h2>
+
     <h3>Personal Information</h3>
     <ul>
-      <li><strong>Address:</strong> Lamjung</li>
+      <li><strong>Address:</strong>  Lamjung</li>
       <li><strong>Email:</strong> <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></li>
       <li><strong>Date of Birth:</strong> March 31, 2003</li>
       <li><strong>Instagram:</strong> <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></li>
     </ul>
+
     <h3>Education</h3>
     <ul>
       <li><strong>MBBS</strong> — Gandaki Medical College, Pokhara (2023 – Present)</li>
-      <li><strong>+2</strong> — Kathmandu Model Secondary School, Kathmandu</li>
+      <li><strong>+2 </strong> — Kathmandu Model Secondary School, Kathmandu</li>
       <li><strong>SEE</strong> — Future Star High School, Lamjung (2019)</li>
     </ul>
+
     <h3>Experience & Activities</h3>
     <ul>
       <li>
@@ -227,26 +354,29 @@
         Gandaki Medical College – Department of Community Medicine<br />
         Location: Bhorletar, Lamjung<br />
         1st Year MBBS (2023–24)<br />
-        Participated in a structured field-based research project under the Community Health Diagnosis curriculum.
+        Participated in a structured field-based research project under the Community Health Diagnosis curriculum. Conducted data collection, analysis, and reporting on key health indicators in the rural community of Bhorletar. Developed practical skills in epidemiology, public health assessment, and community engagement.
       </li>
     </ul>
+
     <h3>Languages</h3>
     <ul>
       <li>Nepali (Native)</li>
       <li>English (Intermediate)</li>
       <li>Hindi (Conversational)</li>
     </ul>
+
     <h3>Career Interests</h3>
     <ul>
-      <li>Focus on clinical practice and medical research.</li>
-      <li>Interest in community health and epidemiology.</li>
-      <li>Researching Nepal Stock Exchange (NEPSE), market analysis, and investment strategies.</li>
+      <li>Pursuing a career in medicine with a focus on clinical practice and medical research.</li>
+      <li>Keen interest in community health and epidemiology.</li>
+      <li>Exploring trading research, especially in the Nepal Stock Exchange (NEPSE), including market analysis and investment strategies.</li>
     </ul>
+
     <h3>Hobbies & Interests</h3>
     <ul>
-      <li>Reading medical journals and research.</li>
-      <li>Tracking NEPSE developments.</li>
-      <li>Learning new skills in medicine and finance.</li>
+      <li>Reading medical journals and staying updated with medical research.</li>
+      <li>Following trends and developments in the Nepal Stock Exchange (NEPSE).</li>
+      <li>Exploring new skills and knowledge in both medicine and finance.</li>
     </ul>
   </section>
 
@@ -268,38 +398,52 @@
       <p>Email: <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></p>
       <p>Instagram: <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></p>
     </div>
+
+    <form onsubmit="alert('Thank you for reaching out! Please contact me via email or Instagram.'); return false;">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Your name" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Your email" required />
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="4" placeholder="Your message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
   </section>
 </main>
 
 <script>
-function updateClock() {
-  const now = new Date();
-  const time = now.toLocaleTimeString('en-GB');
-  document.getElementById("nepaliClock").innerText = `🕒 Local Time: ${time}`;
+  // Clock & English calendar update
+  function updateClockAndDate() {
+    // For Nepali Time, here we simulate using local time + 5:45 offset for Nepal Standard Time (NST)
+    const nowUTC = new Date(new Date().toUTCString().slice(0, -4));
+    const nowNepal = new Date(nowUTC.getTime() + (5 * 60 + 45) * 60000);
 
-  const date = now.toLocaleDateString('en-GB', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-  document.getElementById("nepaliDate").innerText = `📅 ${date}`;
-}
-setInterval(updateClock, 1000);
-updateClock();
+    const optionsTime = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    const timeString = nowNepal.toLocaleTimeString('en-GB', optionsTime);
 
-function revealOnScroll() {
-  const sections = document.querySelectorAll('section');
-  const windowHeight = window.innerHeight;
-  sections.forEach(section => {
-    const top = section.getBoundingClientRect().top;
-    if(top < windowHeight - 100) {
-      section.classList.add('visible');
-    }
-  });
-}
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
+    document.getElementById("nepaliClock").textContent = `🕒 Nepali Time: ${timeString}`;
+
+    const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateString = nowNepal.toLocaleDateString('en-GB', optionsDate);
+
+    document.getElementById("englishDate").textContent = `📅 ${dateString}`;
+  }
+  setInterval(updateClockAndDate, 1000);
+  updateClockAndDate();
+
+  // Improved scroll reveal animation
+  function revealOnScroll() {
+    const sections = document.querySelectorAll('section:not(.visible)');
+    const windowHeight = window.innerHeight;
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if(top < windowHeight - 100) {
+        section.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
 </script>
 
 </body>
