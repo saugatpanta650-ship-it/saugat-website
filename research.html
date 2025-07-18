@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Saugat Panta | Research</title>
 <style>
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -34,6 +28,7 @@
     display: flex;
     justify-content: center;
     margin-top: 4rem;
+    padding: 0 1rem;
   }
 
   .typewriter {
@@ -41,40 +36,27 @@
     white-space: nowrap;
     overflow: hidden;
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #004E64;
-    animation: typing 5s steps(45, end), blink-caret 0.75s step-end infinite;
-    max-width: 100%;
+    animation: typing 4s steps(45, end), blink-caret 0.75s step-end infinite;
+    width: 0;
   }
 
   @keyframes typing {
     from { width: 0; }
-    to { width: 100%; }
+    to { width: 32ch; } /* Adjusted for exact text length */
   }
 
   @keyframes blink-caret {
     0%, 100% { border-color: transparent; }
     50% { border-color: #004E64; }
   }
+
+  @media (max-width: 600px) {
+    .typewriter {
+      font-size: 1.1rem;
+      animation: typing 4s steps(45, end), blink-caret 0.75s step-end infinite;
+      to { width: 32ch; }
+    }
+  }
 </style>
-</head>
-<body>
-
-<header>
-  <h1>Saugat Panta</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="blogs.html">Blogs</a>
-    <a href="research.html">Research</a>
-  </nav>
-</header>
-
-<main>
-  <h2>Research</h2>
-  <div class="typewriter-container">
-    <div class="typewriter">Research and journal will be published soon. Thank you!</div>
-  </div>
-</main>
-
-</body>
-</html>
