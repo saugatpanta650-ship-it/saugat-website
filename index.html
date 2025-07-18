@@ -90,12 +90,12 @@
   section {
     margin-bottom: 5rem;
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(60px) rotateX(45deg);
+    transition: opacity 1s ease, transform 1s ease;
   }
   section.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) rotateX(0);
   }
   h2 {
     border-bottom: 3px solid var(--primary);
@@ -104,96 +104,38 @@
     color: var(--primary);
     font-weight: 700;
   }
-  h3 {
-    margin-top: 2rem;
-    color: var(--secondary);
-    font-weight: 600;
+  .clock-calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+    animation: riseIn 1.2s ease-out;
   }
-  ul {
-    list-style: none;
-    padding-left: 0;
+  .clock {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2d3142;
+    animation: wave 2s infinite;
   }
-  li {
-    margin-bottom: 0.6rem;
-    line-height: 1.5;
+  .calendar {
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 0.5rem;
   }
-  a {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color var(--transition-time);
+  @keyframes wave {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(1.5deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-1.5deg); }
+    100% { transform: rotate(0deg); }
   }
-  a:hover {
-    text-decoration: underline;
-    color: var(--secondary);
-  }
-  .contact-info p {
-    margin: 0.4rem 0;
-    font-weight: 600;
-  }
-  .small-text {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-  }
-  /* Trading insights styling */
-  .news-article {
-    border-left: 4px solid var(--primary);
-    padding-left: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .news-article h4 {
-    margin: 0 0 0.3rem 0;
-    color: var(--secondary);
-  }
-  /* Contact form styling */
-  form {
-    max-width: 450px;
-    margin-top: 1rem;
-  }
-  label {
-    display: block;
-    margin-bottom: 0.3rem;
-    font-weight: 600;
-  }
-  input, textarea {
-    width: 100%;
-    padding: 0.6rem 0.8rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
-  }
-  input:focus, textarea:focus {
-    border-color: var(--secondary);
-    outline: none;
-    box-shadow: 0 0 6px var(--secondary);
-  }
-  button {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 0.7rem 1.5rem;
-    font-size: 1.1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-  }
-  button:hover {
-    background: var(--secondary);
-  }
-  /* Responsive */
-  @media (max-width: 600px) {
-    main {
-      padding: 1.5rem 1.5rem;
-      margin: 1rem;
-    }
-    nav a {
-      margin-left: 1rem;
-      font-size: 0.95rem;
-    }
+  @keyframes riseIn {
+    0% { transform: scale(0.9) translateY(30px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
   }
 </style>
 </head>
@@ -213,118 +155,52 @@
 </header>
 
 <main>
+  <div class="clock-calendar-container">
+    <div class="clock" id="nepaliClock">Loading Time...</div>
+    <div class="calendar" id="nepaliDate">Loading Date...</div>
+  </div>
+
   <section id="home" tabindex="-1">
     <h2>Welcome</h2>
     <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance.
-   This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts!
+    This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts!
     On this website, you can also explore my professional background and get insights into trading and investment strategies.  
     Feel free to browse around!</p>
-  </section>
-
-  <section id="about" tabindex="-1">
-    <h2>About Me</h2>
-    <p>
-      I’m Saugat Panta, a second-year MBBS student at Gandaki Medical College.  
-      I’m deeply interested in the field of medicine, especially research, and continuously learning to become a better future physician.
-    </p>
-  </section>
-
-  <section id="cv" tabindex="-1">
-    <h2>Curriculum Vitae</h2>
-
-    <h3>Personal Information</h3>
-    <ul>
-      <li><strong>Address:</strong>  Lamjung</li>
-      <li><strong>Email:</strong> <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></li>
-      <li><strong>Date of Birth:</strong> March 31, 2003</li>
-      <li><strong>Instagram:</strong> <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></li>
-    </ul>
-
-    <h3>Education</h3>
-    <ul>
-      <li><strong>MBBS</strong> — Gandaki Medical College, Pokhara (2023 – Present)</li>
-      <li><strong>+2 </strong> — Kathmandu Model Secondary School, Kathmandu</li>
-      <li><strong>SEE</strong> — Future Star High School, Lamjung (2019)</li>
-    </ul>
-
-    <h3>Experience & Activities</h3>
-    <ul>
-      <li>
-        <strong>Community Health Diagnosis Research</strong><br />
-        Gandaki Medical College – Department of Community Medicine<br />
-        Location: Bhorletar, Lamjung<br />
-        1st Year MBBS (2023–24)<br />
-        Participated in a structured field-based research project under the Community Health Diagnosis curriculum. Conducted data collection, analysis, and reporting on key health indicators in the rural community of Bhorletar. Developed practical skills in epidemiology, public health assessment, and community engagement.
-      </li>
-    </ul>
-
-    <h3>Languages</h3>
-    <ul>
-      <li>Nepali (Native)</li>
-      <li>English (Intermediate)</li>
-      <li>Hindi (Conversational)</li>
-    </ul>
-
-    <h3>Career Interests</h3>
-    <ul>
-      <li>Pursuing a career in medicine with a focus on clinical practice and medical research.</li>
-      <li>Keen interest in community health and epidemiology.</li>
-      <li>Exploring trading research, especially in the Nepal Stock Exchange (NEPSE), including market analysis and investment strategies.</li>
-    </ul>
-
-    <h3>Hobbies & Interests</h3>
-    <ul>
-      <li>Reading medical journals and staying updated with medical research.</li>
-      <li>Following trends and developments in the Nepal Stock Exchange (NEPSE).</li>
-      <li>Exploring new skills and knowledge in both medicine and finance.</li>
-    </ul>
-  </section>
-
-  <section id="trading" tabindex="-1">
-    <h2>Trading Insights</h2>
-    <ul>
-      <li><strong>Trading Analysis</strong></li>
-      <li><strong>Investment Analysis</strong></li>
-      <li><strong>Finance Management</strong></li>
-      <li><strong>Company Report Analysis</strong></li>
-      <li><strong>Portfolio Management Techniques</strong></li>
-    </ul>
-  </section>
-
-  <section id="contact" tabindex="-1">
-    <h2>Contact Me</h2>
-    <p>If you want to reach out, please send an email or message via Instagram.</p>
-    <div class="contact-info">
-      <p>Email: <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></p>
-      <p>Instagram: <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></p>
-    </div>
-
-    <form onsubmit="alert('Thank you for reaching out! Please contact me via email or Instagram.'); return false;">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" placeholder="Your name" required />
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" placeholder="Your email" required />
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" rows="4" placeholder="Your message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
   </section>
 </main>
 
 <script>
-  // Fade-in animation on scroll for sections
-  function revealOnScroll() {
-    const sections = document.querySelectorAll('section');
-    const windowHeight = window.innerHeight;
-    sections.forEach(section => {
-      const top = section.getBoundingClientRect().top;
-      if(top < windowHeight - 100) {
-        section.classList.add('visible');
-      }
-    });
-  }
-  window.addEventListener('scroll', revealOnScroll);
-  window.addEventListener('load', revealOnScroll);
+function updateNepaliClock() {
+  const now = new Date();
+  const options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+  const nepaliTime = new Intl.DateTimeFormat('en-GB', options).format(now);
+  document.getElementById("nepaliClock").innerText = `🕒 Nepali Time: ${nepaliTime}`;
+}
+setInterval(updateNepaliClock, 1000);
+updateNepaliClock();
+
+function updateNepaliDate() {
+  const bsMonths = ["बैशाख", "जेठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पुष", "माघ", "फाल्गुण", "चैत्र"];
+  const adDate = new Date();
+  const bsYear = adDate.getFullYear() + 57;
+  const bsMonth = bsMonths[adDate.getMonth()];
+  const bsDay = adDate.getDate();
+  document.getElementById("nepaliDate").innerText = `📅 आजको मिति: ${bsYear} ${bsMonth} ${bsDay}`;
+}
+updateNepaliDate();
+
+function revealOnScroll() {
+  const sections = document.querySelectorAll('section');
+  const windowHeight = window.innerHeight;
+  sections.forEach(section => {
+    const top = section.getBoundingClientRect().top;
+    if(top < windowHeight - 100) {
+      section.classList.add('visible');
+    }
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
 </script>
 
 </body>
