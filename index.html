@@ -6,9 +6,12 @@
 <title>Saugat Panta | Personal Website</title>
 <style>
   :root {
-    --background: #FAFAFA;
+    --background: #FFF9F0; /* Soft Cream */
     --primary: #1B3A4B;       /* Dark Navy */
     --secondary: #3A9CA8;     /* Muted Teal */
+    --accent1: #E07A5F;       /* Warm Coral */
+    --accent2: #3B6978;       /* Deep Slate */
+    --accent3: #D4A373;       /* Soft Gold */
     --text-main: #2E2E2E;     /* Charcoal */
     --text-muted: #6B6B6B;    /* Gray */
     --border: #D6D6D6;
@@ -87,7 +90,7 @@
     border: 1px solid var(--border);
   }
 
-  /* Clock & Calendar container - clean & elegant */
+  /* Clock & Calendar container */
   .clock-calendar-container {
     display: flex;
     flex-direction: column;
@@ -218,25 +221,79 @@
     background: var(--primary);
   }
 
-  /* Typewriter effect for main welcome heading */
-  .typewriter {
+  /* Welcome fade + slide in from left */
+  .welcome-text {
     font-weight: 700;
     font-size: 2.5rem;
     color: var(--primary);
-    border-right: 3px solid var(--secondary);
-    white-space: nowrap;
-    overflow: hidden;
-    animation: typing 4s steps(40, end), blinkCaret 0.75s step-end infinite;
-    max-width: 100%;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: fadeSlideIn 1.5s ease forwards;
     margin-bottom: 1.5rem;
   }
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+  @keyframes fadeSlideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
-  @keyframes blinkCaret {
-    0%, 100% { border-color: transparent; }
-    50% { border-color: var(--secondary); }
+
+  /* CV section topics styling */
+  .cv-topic {
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 4px;
+    border-bottom: 3px solid transparent;
+    opacity: 0;
+    transform: scale(0.95);
+    animation-fill-mode: forwards;
+    animation-duration: 0.8s;
+  }
+  /* Unique colors and animation delays */
+  .cv-topic.personal-info {
+    color: var(--accent1);
+    animation-name: fadeScaleUp;
+    animation-delay: 0.2s;
+  }
+  .cv-topic.education {
+    color: var(--accent2);
+    animation-name: fadeScaleUp;
+    animation-delay: 0.4s;
+  }
+  .cv-topic.experience {
+    color: var(--accent3);
+    animation-name: fadeScaleUp;
+    animation-delay: 0.6s;
+  }
+  .cv-topic.languages {
+    color: var(--accent1);
+    animation-name: fadeScaleUp;
+    animation-delay: 0.8s;
+  }
+  .cv-topic.career-interests {
+    color: var(--accent2);
+    animation-name: fadeScaleUp;
+    animation-delay: 1s;
+  }
+  .cv-topic.hobbies {
+    color: var(--accent3);
+    animation-name: fadeScaleUp;
+    animation-delay: 1.2s;
+  }
+
+  @keyframes fadeScaleUp {
+    to {
+      opacity: 1;
+      transform: scale(1);
+      border-bottom-color: currentColor;
+    }
+  }
+
+  /* Reveal CV topics when CV section visible */
+  #cv.visible .cv-topic {
+    animation-play-state: running;
   }
 
   /* Responsive adjustments */
@@ -278,7 +335,7 @@
   </div>
 
   <section id="home" tabindex="-1">
-    <div class="typewriter">Welcome to My Personal Website</div>
+    <div class="welcome-text">Welcome to My Personal Website</div>
     <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance.<br />
       This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts!<br />
       On this website, you can also explore my professional background and get insights into trading and investment strategies.<br />
@@ -297,7 +354,7 @@
   <section id="cv" tabindex="-1">
     <h2>Curriculum Vitae</h2>
 
-    <h3>Personal Information</h3>
+    <div class="cv-topic personal-info">Personal Information</div>
     <ul>
       <li><strong>Address:</strong>  Lamjung</li>
       <li><strong>Email:</strong> <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></li>
@@ -305,14 +362,14 @@
       <li><strong>Instagram:</strong> <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></li>
     </ul>
 
-    <h3>Education</h3>
+    <div class="cv-topic education">Education</div>
     <ul>
       <li><strong>MBBS</strong> — Gandaki Medical College, Pokhara (2023 – Present)</li>
       <li><strong>+2 </strong> — Kathmandu Model Secondary School, Kathmandu</li>
       <li><strong>SEE</strong> — Future Star High School, Lamjung (2019)</li>
     </ul>
 
-    <h3>Experience & Activities</h3>
+    <div class="cv-topic experience">Experience & Activities</div>
     <ul>
       <li>
         <strong>Community Health Diagnosis Research</strong><br />
@@ -323,21 +380,21 @@
       </li>
     </ul>
 
-    <h3>Languages</h3>
+    <div class="cv-topic languages">Languages</div>
     <ul>
       <li>Nepali (Native)</li>
       <li>English (Intermediate)</li>
       <li>Hindi (Conversational)</li>
     </ul>
 
-    <h3>Career Interests</h3>
+    <div class="cv-topic career-interests">Career Interests</div>
     <ul>
       <li>Pursuing a career in medicine with a focus on clinical practice and medical research.</li>
       <li>Keen interest in community health and epidemiology.</li>
       <li>Exploring trading research, especially in the Nepal Stock Exchange (NEPSE), including market analysis and investment strategies.</li>
     </ul>
 
-    <h3>Hobbies & Interests</h3>
+    <div class="cv-topic hobbies">Hobbies & Interests</div>
     <ul>
       <li>Reading medical journals and staying updated with medical research.</li>
       <li>Following trends and developments in the Nepal Stock Exchange (NEPSE).</li>
@@ -377,21 +434,54 @@
 </main>
 
 <script>
-  // Update clock & calendar in Nepali time zone (UTC+5:45)
+  // Correct Nepali Time Calculation (UTC+5:45) using UTC methods
   function updateNepaliTime() {
     const nowUTC = new Date();
-    // Convert UTC to Nepal Time (UTC+5:45)
-    const nepaliOffsetMs = (5 * 60 + 45) * 60 * 1000;
-    const nepaliDate = new Date(nowUTC.getTime() + nepaliOffsetMs);
 
-    // Format time as HH:mm:ss
-    const timeStr = nepaliDate.toLocaleTimeString('en-GB', { hour12: false });
+    // Get current UTC time components
+    const utcYear = nowUTC.getUTCFullYear();
+    const utcMonth = nowUTC.getUTCMonth();
+    const utcDate = nowUTC.getUTCDate();
+    const utcHours = nowUTC.getUTCHours();
+    const utcMinutes = nowUTC.getUTCMinutes();
+    const utcSeconds = nowUTC.getUTCSeconds();
+
+    // Nepali offset: +5 hours 45 minutes
+    let nepaliHours = utcHours + 5;
+    let nepaliMinutes = utcMinutes + 45;
+    let nepaliDate = utcDate;
+    let nepaliMonth = utcMonth;
+    let nepaliYear = utcYear;
+
+    if (nepaliMinutes >= 60) {
+      nepaliMinutes -= 60;
+      nepaliHours += 1;
+    }
+    if (nepaliHours >= 24) {
+      nepaliHours -= 24;
+      nepaliDate += 1;
+    }
+
+    // Handle date overflow (very simplified, for demo purposes)
+    const daysInMonth = new Date(nepaliYear, nepaliMonth + 1, 0).getDate();
+    if (nepaliDate > daysInMonth) {
+      nepaliDate = 1;
+      nepaliMonth += 1;
+      if (nepaliMonth > 11) {
+        nepaliMonth = 0;
+        nepaliYear += 1;
+      }
+    }
+
+    // Format time as HH:mm:ss with leading zeros
+    const pad = (n) => (n < 10 ? '0' + n : n);
+    const timeStr = `${pad(nepaliHours)}:${pad(nepaliMinutes)}:${pad(utcSeconds)}`;
     document.getElementById('nepaliClock').textContent = `🕒 Nepali Time: ${timeStr}`;
 
-    // Format date as Weekday, Month Day, Year
-    const dateStr = nepaliDate.toLocaleDateString('en-GB', {
-      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-    });
+    // Format date string
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const nepaliDateObj = new Date(nepaliYear, nepaliMonth, nepaliDate);
+    const dateStr = nepaliDateObj.toLocaleDateString('en-GB', options);
     document.getElementById('nepaliDate').textContent = `📅 ${dateStr}`;
   }
   setInterval(updateNepaliTime, 1000);
