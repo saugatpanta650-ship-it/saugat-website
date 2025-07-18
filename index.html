@@ -6,15 +6,13 @@
 <title>Saugat Panta | Personal Website</title>
 <style>
   :root {
-    --background: #FDF8F3;
-    --primary: #004E64;
-    --secondary: #F25C54;
-    --success: #719949;
-    --danger: #B33030;
-    --text-main: #2D2D2D;
-    --text-muted: #7D8B91;
-    --border: #E2DCD3;
-    --transition-time: 0.4s;
+    --background: #FAFAFA;
+    --primary: #1B3A4B;       /* Dark Navy */
+    --secondary: #3A9CA8;     /* Muted Teal */
+    --text-main: #2E2E2E;     /* Charcoal */
+    --text-muted: #6B6B6B;    /* Gray */
+    --border: #D6D6D6;
+    --transition-time: 0.5s;
   }
   * {
     box-sizing: border-box;
@@ -39,7 +37,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(27, 58, 75, 0.4);
   }
   header h1 {
     margin: 0;
@@ -78,120 +76,108 @@
   nav a:focus::after {
     width: 100%;
   }
+
   main {
     max-width: 900px;
     margin: 3rem auto 4rem;
     background: white;
     padding: 2rem 3rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     border-radius: 12px;
     border: 1px solid var(--border);
   }
+
+  /* Clock & Calendar container - clean & elegant */
+  .clock-calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    box-shadow: 0 3px 12px rgba(58,156,168, 0.15);
+    border-radius: 12px;
+    background: #f5fafa;
+  }
+  .clock {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: 'Segoe UI Mono', monospace;
+    letter-spacing: 4px;
+    margin-bottom: 0.5rem;
+    animation: subtleGlow 2.5s ease-in-out infinite alternate;
+  }
+  .calendar {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  @keyframes subtleGlow {
+    0% { text-shadow: 0 0 10px var(--secondary); }
+    100% { text-shadow: 0 0 20px var(--secondary); }
+  }
+
+  /* Section styling */
   section {
     margin-bottom: 5rem;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   }
   section.visible {
     opacity: 1;
     transform: translateY(0);
   }
-  /* Animate h2 heading inside visible section */
-  section.visible h2 {
-    animation: slideInLeftBounce 0.8s forwards;
-    color: var(--primary);
-    text-shadow: 0 0 8px var(--secondary);
-  }
-  /* Animate other content inside section */
-  section.visible > *:not(h2) {
-    animation: fadeInUp 1s ease forwards;
-    opacity: 0;
-    animation-delay: 0.3s;
-    animation-fill-mode: forwards;
-  }
-  @keyframes slideInLeftBounce {
-    0% {
-      opacity: 0;
-      transform: translateX(-150px);
-      color: var(--text-muted);
-      text-shadow: none;
-    }
-    60% {
-      opacity: 1;
-      transform: translateX(30px);
-      color: var(--secondary);
-      text-shadow: 0 0 10px var(--secondary);
-    }
-    80% {
-      transform: translateX(-10px);
-      color: var(--primary);
-      text-shadow: 0 0 6px var(--secondary);
-    }
-    100% {
-      transform: translateX(0);
-      color: var(--primary);
-      text-shadow: 0 0 8px var(--secondary);
-    }
-  }
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
   h2 {
-    border-bottom: 3px solid var(--primary);
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
     font-weight: 700;
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    position: relative;
   }
-  h3 {
-    margin-top: 2rem;
-    color: var(--secondary);
-    font-weight: 600;
+  /* Animated underline for headings */
+  h2::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -6px;
+    left: 0;
+    background: var(--secondary);
+    transition: width 0.6s ease;
+  }
+  h2:hover::after {
+    width: 50px;
+  }
+
+  p, li {
+    font-size: 1.1rem;
+    color: var(--text-main);
   }
   ul {
     list-style: none;
     padding-left: 0;
   }
   li {
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.7rem;
     line-height: 1.5;
   }
   a {
-    color: var(--primary);
+    color: var(--secondary);
     text-decoration: none;
     font-weight: 600;
-    transition: color var(--transition-time);
+    transition: color 0.3s ease;
   }
   a:hover {
+    color: var(--primary);
     text-decoration: underline;
-    color: var(--secondary);
   }
   .contact-info p {
     margin: 0.4rem 0;
     font-weight: 600;
+    color: var(--text-main);
   }
-  .small-text {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-  }
-  /* Trading insights styling */
-  .news-article {
-    border-left: 4px solid var(--primary);
-    padding-left: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .news-article h4 {
-    margin: 0 0 0.3rem 0;
-    color: var(--secondary);
-  }
-  /* Contact form styling */
   form {
     max-width: 450px;
     margin-top: 1rem;
@@ -200,6 +186,7 @@
     display: block;
     margin-bottom: 0.3rem;
     font-weight: 600;
+    color: var(--text-main);
   }
   input, textarea {
     width: 100%;
@@ -217,7 +204,7 @@
     box-shadow: 0 0 6px var(--secondary);
   }
   button {
-    background: var(--primary);
+    background: var(--secondary);
     color: white;
     border: none;
     padding: 0.7rem 1.5rem;
@@ -228,9 +215,31 @@
     transition: background-color 0.3s ease;
   }
   button:hover {
-    background: var(--secondary);
+    background: var(--primary);
   }
-  /* Responsive */
+
+  /* Typewriter effect for main welcome heading */
+  .typewriter {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--primary);
+    border-right: 3px solid var(--secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 4s steps(40, end), blinkCaret 0.75s step-end infinite;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  @keyframes blinkCaret {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: var(--secondary); }
+  }
+
+  /* Responsive adjustments */
   @media (max-width: 600px) {
     main {
       padding: 1.5rem 1.5rem;
@@ -240,53 +249,8 @@
       margin-left: 1rem;
       font-size: 0.95rem;
     }
-  }
-
-  /* Clock and Calendar container styles */
-  .clock-calendar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 3rem;
-    background: #fefefe;
-    padding: 2rem 3rem;
-    border: 2px dashed var(--secondary);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    animation: popIn 1s ease-in-out;
-  }
-  .clock {
-    font-size: 5rem;
-    font-weight: bold;
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-family: 'Courier New', Courier, monospace;
-    letter-spacing: 0.05em;
-    animation: pulse 1.5s infinite alternate;
-  }
-  .calendar {
-    font-size: 1.6rem;
-    color: var(--text-muted);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    letter-spacing: 0.05em;
-    animation: glowText 3s ease-in-out infinite alternate;
-  }
-  @keyframes pulse {
-    from { transform: scale(1); }
-    to { transform: scale(1.05); }
-  }
-  @keyframes popIn {
-    0% { transform: scale(0.9); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-  @keyframes glowText {
-    0% {
-      text-shadow: 0 0 5px var(--secondary);
-      color: var(--secondary);
-    }
-    100% {
-      text-shadow: 0 0 20px var(--secondary);
-      color: var(--primary);
+    .clock {
+      font-size: 3.5rem;
     }
   }
 </style>
@@ -307,24 +271,25 @@
 </header>
 
 <main>
-  <!-- Clock and Calendar with cool animation -->
-  <div class="clock-calendar-container" aria-label="Nepali Time Clock and English Calendar">
+  <!-- Clock & Calendar with subtle glow animation -->
+  <div class="clock-calendar-container" aria-label="Nepali Time and Date">
     <div class="clock" id="nepaliClock">Loading Time...</div>
-    <div class="calendar" id="englishDate">Loading Date...</div>
+    <div class="calendar" id="nepaliDate">Loading Date...</div>
   </div>
 
   <section id="home" tabindex="-1">
-    <h2>Welcome</h2>
-    <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance.
-   This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts!
-    On this website, you can also explore my professional background and get insights into trading and investment strategies.  
-    Feel free to browse around!</p>
+    <div class="typewriter">Welcome to My Personal Website</div>
+    <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance.<br />
+      This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts!<br />
+      On this website, you can also explore my professional background and get insights into trading and investment strategies.<br />
+      Feel free to browse around!
+    </p>
   </section>
 
   <section id="about" tabindex="-1">
     <h2>About Me</h2>
     <p>
-      I’m Saugat Panta, a second-year MBBS student at Gandaki Medical College.  
+      I’m Saugat Panta, a second-year MBBS student at Gandaki Medical College.<br />
       I’m deeply interested in the field of medicine, especially research, and continuously learning to become a better future physician.
     </p>
   </section>
@@ -412,28 +377,29 @@
 </main>
 
 <script>
-  // Clock & English calendar update
-  function updateClockAndDate() {
-    // For Nepali Time, here we simulate using local time + 5:45 offset for Nepal Standard Time (NST)
-    const nowUTC = new Date(new Date().toUTCString().slice(0, -4));
-    const nowNepal = new Date(nowUTC.getTime() + (5 * 60 + 45) * 60000);
+  // Update clock & calendar in Nepali time zone (UTC+5:45)
+  function updateNepaliTime() {
+    const nowUTC = new Date();
+    // Convert UTC to Nepal Time (UTC+5:45)
+    const nepaliOffsetMs = (5 * 60 + 45) * 60 * 1000;
+    const nepaliDate = new Date(nowUTC.getTime() + nepaliOffsetMs);
 
-    const optionsTime = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    const timeString = nowNepal.toLocaleTimeString('en-GB', optionsTime);
+    // Format time as HH:mm:ss
+    const timeStr = nepaliDate.toLocaleTimeString('en-GB', { hour12: false });
+    document.getElementById('nepaliClock').textContent = `🕒 Nepali Time: ${timeStr}`;
 
-    document.getElementById("nepaliClock").textContent = `🕒 Nepali Time: ${timeString}`;
-
-    const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const dateString = nowNepal.toLocaleDateString('en-GB', optionsDate);
-
-    document.getElementById("englishDate").textContent = `📅 ${dateString}`;
+    // Format date as Weekday, Month Day, Year
+    const dateStr = nepaliDate.toLocaleDateString('en-GB', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+    document.getElementById('nepaliDate').textContent = `📅 ${dateStr}`;
   }
-  setInterval(updateClockAndDate, 1000);
-  updateClockAndDate();
+  setInterval(updateNepaliTime, 1000);
+  updateNepaliTime();
 
-  // Improved scroll reveal animation
+  // Scroll reveal animation for sections (fade and slide up)
   function revealOnScroll() {
-    const sections = document.querySelectorAll('section:not(.visible)');
+    const sections = document.querySelectorAll('section');
     const windowHeight = window.innerHeight;
     sections.forEach(section => {
       const top = section.getBoundingClientRect().top;
