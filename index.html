@@ -6,22 +6,23 @@
 <title>Saugat Panta | Personal Website</title>
 <style>
   :root {
-    --background: #FAF5EF; /* cream/off-white */
-    --primary: #1D3557; /* dark blue */
-    --secondary: #E63946; /* red accent */
+    --background: #FDF8F3;
+    --primary: #004E64;
+    --secondary: #F25C54;
+    --success: #719949;
+    --danger: #B33030;
     --text-main: #2D2D2D;
-    --text-muted: #6C757D;
-    --border: #D8D3CC;
+    --text-muted: #7D8B91;
+    --border: #E2DCD3;
     --transition-time: 0.4s;
-    --flip-duration: 0.6s;
   }
   * {
     box-sizing: border-box;
   }
   body {
-    margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
     background: var(--background);
     color: var(--text-main);
     line-height: 1.6;
@@ -38,7 +39,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   }
   header h1 {
     margin: 0;
@@ -79,105 +80,13 @@
   }
   main {
     max-width: 900px;
-    margin: 2rem auto 4rem;
-    padding: 0 1rem;
+    margin: 3rem auto 4rem;
+    background: white;
+    padding: 2rem 3rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    border-radius: 12px;
+    border: 1px solid var(--border);
   }
-
-  /* ======= Clock Container ======= */
-  .clock-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin: 3rem auto 1rem;
-  }
-
-  /* Digit box for each clock digit */
-  .digit-box {
-    background: #000;
-    color: #fff;
-    font-weight: 700;
-    font-size: 3.5rem;
-    width: 60px;
-    height: 90px;
-    border-radius: 8px;
-    perspective: 1000px;
-    user-select: none;
-    position: relative;
-  }
-
-  /* Inner flipping card */
-  .flip-card {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    transform-style: preserve-3d;
-    transition: transform var(--flip-duration) ease-in-out;
-  }
-
-  /* Front and back faces */
-  .flip-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    line-height: 90px;
-    text-align: center;
-    backface-visibility: hidden;
-    border-radius: 8px;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
-  }
-  .front {
-    background: #000;
-  }
-  .back {
-    background: #111;
-    color: #ddd;
-    transform: rotateX(180deg);
-  }
-
-  /* Flip animation triggered by JS */
-  .flipped {
-    transform: rotateX(180deg);
-  }
-
-  /* Colon between hour/min/sec */
-  .colon {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    user-select: none;
-  }
-
-  /* Nepali Time label below clock */
-  .time-label {
-    text-align: center;
-    font-weight: 600;
-    font-size: 1.3rem;
-    color: var(--primary);
-    margin-top: 0.3rem;
-  }
-
-  /* Calendar container */
-  .calendar-container {
-    margin: 0 auto 3rem;
-    max-width: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: var(--text-main);
-    user-select: none;
-  }
-  .calendar-icon, .watch-icon {
-    width: 26px;
-    height: 26px;
-    fill: var(--secondary);
-    flex-shrink: 0;
-  }
-
-  /* Section headings */
   section {
     margin-bottom: 5rem;
     opacity: 0;
@@ -194,39 +103,96 @@
     margin-bottom: 1rem;
     color: var(--primary);
     font-weight: 700;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-
-  /* CV subsection headings with animation */
-  .cv-subheading {
-    color: var(--secondary);
-    font-weight: 700;
+  h3 {
     margin-top: 2rem;
-    font-size: 1.3rem;
-    opacity: 0;
-    transform: translateX(-30px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    color: var(--secondary);
+    font-weight: 600;
   }
-  .cv-subheading.visible {
-    opacity: 1;
-    transform: translateX(0);
+  ul {
+    list-style: none;
+    padding-left: 0;
   }
-
+  li {
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+  }
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color var(--transition-time);
+  }
+  a:hover {
+    text-decoration: underline;
+    color: var(--secondary);
+  }
+  .contact-info p {
+    margin: 0.4rem 0;
+    font-weight: 600;
+  }
+  .small-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  /* Trading insights styling */
+  .news-article {
+    border-left: 4px solid var(--primary);
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .news-article h4 {
+    margin: 0 0 0.3rem 0;
+    color: var(--secondary);
+  }
+  /* Contact form styling */
+  form {
+    max-width: 450px;
+    margin-top: 1rem;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+  input:focus, textarea:focus {
+    border-color: var(--secondary);
+    outline: none;
+    box-shadow: 0 0 6px var(--secondary);
+  }
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background: var(--secondary);
+  }
   /* Responsive */
   @media (max-width: 600px) {
-    .digit-box {
-      width: 40px;
-      height: 60px;
-      font-size: 2.5rem;
-      line-height: 60px;
+    main {
+      padding: 1.5rem 1.5rem;
+      margin: 1rem;
     }
-    .colon {
-      font-size: 2.5rem;
-    }
-    .calendar-container {
-      max-width: 100%;
-      font-size: 1rem;
-      gap: 5px;
+    nav a {
+      margin-left: 1rem;
+      font-size: 0.95rem;
     }
   }
 </style>
@@ -247,31 +213,6 @@
 </header>
 
 <main>
-
-  <!-- Clock -->
-  <div class="clock-container" aria-label="Nepali Time Clock" role="timer" aria-live="polite" aria-atomic="true">
-    <!-- Digits: 6 digits for HH:MM:SS -->
-    <div class="digit-box"><div class="flip-card"><div class="flip-face front">0</div><div class="flip-face back">0</div></div></div>
-    <div class="digit-box"><div class="flip-card"><div class="flip-face front">0</div><div class="flip-face back">0</div></div></div>
-    <div class="colon">:</div>
-    <div class="digit-box"><div class="flip-card"><div class="flip-face front">0</div><div class="flip-face back">0</div></div></div>
-    <div class="digit-box"><div class="flip-card"><div class="flip-face front">0</div><div class="flip-face back">0</div></div></div>
-    <div class="colon">:</div>
-    <div class="digit-box"><div class="flip-card"><div class="flip-face front">0</div><div class="flip-face back">0</div></div></div>
-    <div class="digit-box"><div class="flip-card"><div class="flip-face front">0</div><div class="flip-face back">0</div></div></div>
-  </div>
-  <div class="time-label" aria-label="Nepali Time Label">Nepali Time</div>
-
-  <!-- Calendar -->
-  <div class="calendar-container" aria-label="Current Date">
-    <svg class="calendar-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M7 11h5v5H7z"></path>
-      <path fill="none" stroke="currentColor" stroke-width="2" d="M3 8h18M8 3v3M16 3v3M21 8v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8h18z"></path>
-    </svg>
-    <div id="calendar-date">Loading Date...</div>
-  </div>
-
-  <!-- Sections -->
   <section id="home" tabindex="-1">
     <h2>Welcome</h2>
     <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance.
@@ -291,7 +232,7 @@
   <section id="cv" tabindex="-1">
     <h2>Curriculum Vitae</h2>
 
-    <h3 class="cv-subheading">Personal Information</h3>
+    <h3>Personal Information</h3>
     <ul>
       <li><strong>Address:</strong>  Lamjung</li>
       <li><strong>Email:</strong> <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></li>
@@ -299,14 +240,14 @@
       <li><strong>Instagram:</strong> <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></li>
     </ul>
 
-    <h3 class="cv-subheading">Education</h3>
+    <h3>Education</h3>
     <ul>
       <li><strong>MBBS</strong> — Gandaki Medical College, Pokhara (2023 – Present)</li>
       <li><strong>+2 </strong> — Kathmandu Model Secondary School, Kathmandu</li>
       <li><strong>SEE</strong> — Future Star High School, Lamjung (2019)</li>
     </ul>
 
-    <h3 class="cv-subheading">Experience & Activities</h3>
+    <h3>Experience & Activities</h3>
     <ul>
       <li>
         <strong>Community Health Diagnosis Research</strong><br />
@@ -317,21 +258,21 @@
       </li>
     </ul>
 
-    <h3 class="cv-subheading">Languages</h3>
+    <h3>Languages</h3>
     <ul>
       <li>Nepali (Native)</li>
       <li>English (Intermediate)</li>
       <li>Hindi (Conversational)</li>
     </ul>
 
-    <h3 class="cv-subheading">Career Interests</h3>
+    <h3>Career Interests</h3>
     <ul>
       <li>Pursuing a career in medicine with a focus on clinical practice and medical research.</li>
       <li>Keen interest in community health and epidemiology.</li>
       <li>Exploring trading research, especially in the Nepal Stock Exchange (NEPSE), including market analysis and investment strategies.</li>
     </ul>
 
-    <h3 class="cv-subheading">Hobbies & Interests</h3>
+    <h3>Hobbies & Interests</h3>
     <ul>
       <li>Reading medical journals and staying updated with medical research.</li>
       <li>Following trends and developments in the Nepal Stock Exchange (NEPSE).</li>
@@ -340,7 +281,7 @@
   </section>
 
   <section id="trading" tabindex="-1">
-    <h2>Trading Insightst That Will Be Uploaded Here</h2>
+    <h2>Trading Insights</h2>
     <ul>
       <li><strong>Trading Analysis</strong></li>
       <li><strong>Investment Analysis</strong></li>
@@ -368,91 +309,22 @@
       <button type="submit">Send Message</button>
     </form>
   </section>
-
 </main>
 
 <script>
-  // Helper to pad zero
-  function pad(num) {
-    return num < 10 ? "0" + num : num.toString();
-  }
-
-  // 3D Flip Clock logic
-  const digitBoxes = [...document.querySelectorAll(".digit-box")];
-
-  // We have 6 digit boxes for HH:MM:SS
-  // digitBoxes indices: 0,1 = HH, 2,3 = MM, 4,5 = SS
-
-  // Store last digits to detect changes
-  let lastDigits = ["0","0","0","0","0","0"];
-
-  function flipDigit(box, newDigit) {
-    const flipCard = box.querySelector(".flip-card");
-    const front = flipCard.querySelector(".front");
-    const back = flipCard.querySelector(".back");
-
-    if(front.textContent === newDigit) return; // no change
-
-    back.textContent = newDigit;
-    flipCard.classList.add("flipped");
-
-    // After animation, swap front and back text and reset flip
-    setTimeout(() => {
-      front.textContent = newDigit;
-      flipCard.classList.remove("flipped");
-    }, 600);
-  }
-
-  function updateClock() {
-    // Get Nepali time approx by adding 5:45 to UTC
-    // Let's calculate Nepali time based on current local time + offset to match Nepal Standard Time (UTC+5:45)
-    const nowUTC = new Date(new Date().toUTCString().slice(0,-4));
-    const nepalOffsetMins = 5 * 60 + 45;
-    const nepalTime = new Date(nowUTC.getTime() + nepalOffsetMins * 60000);
-
-    const h = pad(nepalTime.getHours());
-    const m = pad(nepalTime.getMinutes());
-    const s = pad(nepalTime.getSeconds());
-
-    const currentDigits = [...h+m+s];
-
-    currentDigits.forEach((digit, idx) => {
-      if(digit !== lastDigits[idx]) {
-        flipDigit(digitBoxes[idx], digit);
-        lastDigits[idx] = digit;
-      }
-    });
-
-    // Update calendar date below
-    const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-    const dateStr = nepalTime.toLocaleDateString('en-GB', options);
-    document.getElementById("calendar-date").textContent = dateStr;
-  }
-
-  // Reveal animation for sections and CV subheadings
+  // Fade-in animation on scroll for sections
   function revealOnScroll() {
-    const sections = document.querySelectorAll("section");
+    const sections = document.querySelectorAll('section');
     const windowHeight = window.innerHeight;
     sections.forEach(section => {
       const top = section.getBoundingClientRect().top;
       if(top < windowHeight - 100) {
-        section.classList.add("visible");
-        // Animate CV subheadings inside this section
-        if(section.id === "cv") {
-          section.querySelectorAll(".cv-subheading").forEach((h, i) => {
-            setTimeout(() => h.classList.add("visible"), i * 150);
-          });
-        }
+        section.classList.add('visible');
       }
     });
   }
-
-  window.addEventListener("scroll", revealOnScroll);
-  window.addEventListener("load", () => {
-    updateClock();
-    setInterval(updateClock, 1000);
-    revealOnScroll();
-  });
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
 </script>
 
 </body>
