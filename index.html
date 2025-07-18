@@ -28,6 +28,50 @@
     line-height: 1.6;
     scroll-behavior: smooth;
   }
+
+  /* ⏰ TIME & DATE CONTAINER */
+  .time-date-container {
+    position: relative;
+    text-align: center;
+    padding: 1rem 0;
+    background: #fff7ed;
+    animation: slideScaleIn 1s ease-out;
+    z-index: 999;
+  }
+
+  .clock {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #004E64;
+    animation: wave 2.5s ease-in-out infinite;
+  }
+
+  .date {
+    font-size: 1rem;
+    color: #7D8B91;
+    margin-top: 0.2rem;
+  }
+
+  @keyframes slideScaleIn {
+    0% {
+      transform: scale(0.8) translateY(-30px);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes wave {
+    0%, 100% {
+      transform: rotate(-1deg);
+    }
+    50% {
+      transform: rotate(1deg);
+    }
+  }
+
   header {
     background: var(--primary);
     color: white;
@@ -135,7 +179,6 @@
     font-size: 0.9rem;
     color: var(--text-muted);
   }
-  /* Trading insights styling */
   .news-article {
     border-left: 4px solid var(--primary);
     padding-left: 1rem;
@@ -145,7 +188,6 @@
     margin: 0 0 0.3rem 0;
     color: var(--secondary);
   }
-  /* Contact form styling */
   form {
     max-width: 450px;
     margin-top: 1rem;
@@ -184,7 +226,6 @@
   button:hover {
     background: var(--secondary);
   }
-  /* Responsive */
   @media (max-width: 600px) {
     main {
       padding: 1.5rem 1.5rem;
@@ -198,6 +239,12 @@
 </style>
 </head>
 <body>
+
+<!-- 🌟 TIME & DATE DISPLAY -->
+<div class="time-date-container">
+  <div class="clock" id="nepali-time"></div>
+  <div class="date" id="english-date"></div>
+</div>
 
 <header>
   <h1>Saugat Panta</h1>
@@ -281,7 +328,7 @@
   </section>
 
   <section id="trading" tabindex="-1">
-    <h2>Trading Insights</h2>
+    <h2>Trading Insights That Will Be Uploaded Here</h2>
     <ul>
       <li><strong>Trading Analysis</strong></li>
       <li><strong>Investment Analysis</strong></li>
@@ -312,19 +359,38 @@
 </main>
 
 <script>
-  // Fade-in animation on scroll for sections
+  // Section fade animation
   function revealOnScroll() {
     const sections = document.querySelectorAll('section');
     const windowHeight = window.innerHeight;
     sections.forEach(section => {
       const top = section.getBoundingClientRect().top;
-      if(top < windowHeight - 100) {
+      if (top < windowHeight - 100) {
         section.classList.add('visible');
       }
     });
   }
   window.addEventListener('scroll', revealOnScroll);
   window.addEventListener('load', revealOnScroll);
+
+  // ⏰ TIME & DATE SCRIPT
+  function updateNepaliTime() {
+    const offset = 5.75; // UTC+5:45
+    const nowUTC = new Date();
+    const nepaliTime = new Date(nowUTC.getTime() + offset * 60 * 60 * 1000);
+    const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    document.getElementById('nepali-time').textContent = `Nepali Time: ${nepaliTime.toLocaleTimeString([], options)}`;
+  }
+
+  function updateEnglishDate() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('english-date').textContent = now.toLocaleDateString('en-US', options);
+  }
+
+  updateNepaliTime();
+  updateEnglishDate();
+  setInterval(updateNepaliTime, 1000);
 </script>
 
 </body>
