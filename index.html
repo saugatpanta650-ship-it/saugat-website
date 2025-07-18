@@ -42,7 +42,7 @@
   .clock {
     font-size: 1.6rem;
     font-weight: bold;
-    color: #004E64;
+    color: #FFC107; /* Amber Gold */
     animation: wave 2.5s ease-in-out infinite;
   }
 
@@ -179,6 +179,7 @@
     font-size: 0.9rem;
     color: var(--text-muted);
   }
+  /* Trading insights styling */
   .news-article {
     border-left: 4px solid var(--primary);
     padding-left: 1rem;
@@ -188,6 +189,7 @@
     margin: 0 0 0.3rem 0;
     color: var(--secondary);
   }
+  /* Contact form styling */
   form {
     max-width: 450px;
     margin-top: 1rem;
@@ -226,6 +228,7 @@
   button:hover {
     background: var(--secondary);
   }
+  /* Responsive */
   @media (max-width: 600px) {
     main {
       padding: 1.5rem 1.5rem;
@@ -272,7 +275,7 @@
     <h2>About Me</h2>
     <p>
       I’m Saugat Panta, a second-year MBBS student at Gandaki Medical College.  
-      I’m deeply interested in the field of medicine, especially research, and continuously learning to become a better future physician.
+      I’m deeply interested in the field of medicine, especially research, and continuously learning to become a better future physician or maybe best surgeon.
     </p>
   </section>
 
@@ -328,7 +331,7 @@
   </section>
 
   <section id="trading" tabindex="-1">
-    <h2>Trading Insights That Will Be Uploaded Here</h2>
+    <h2>Trading Insights That Will Uploaded Here</h2>
     <ul>
       <li><strong>Trading Analysis</strong></li>
       <li><strong>Investment Analysis</strong></li>
@@ -373,13 +376,11 @@
   window.addEventListener('scroll', revealOnScroll);
   window.addEventListener('load', revealOnScroll);
 
-  // ⏰ TIME & DATE SCRIPT
+  // ⏰ TIME & DATE SCRIPT - Using local device time
   function updateNepaliTime() {
-    const offset = 5.75; // UTC+5:45
-    const nowUTC = new Date();
-    const nepaliTime = new Date(nowUTC.getTime() + offset * 60 * 60 * 1000);
+    const now = new Date();
     const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    document.getElementById('nepali-time').textContent = `Nepali Time: ${nepaliTime.toLocaleTimeString([], options)}`;
+    document.getElementById('nepali-time').textContent = `Nepali Time: ${now.toLocaleTimeString([], options)}`;
   }
 
   function updateEnglishDate() {
