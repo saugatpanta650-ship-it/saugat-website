@@ -18,18 +18,12 @@
     padding: 1rem 2rem;
     position: sticky;
     top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
   }
   nav a {
     color: white;
     margin-left: 1.5rem;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1rem;
-    position: relative;
   }
   nav a:hover {
     color: #F25C54;
@@ -48,15 +42,15 @@
     white-space: nowrap;
     overflow: hidden;
     font-weight: 600;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: #004E64;
-    animation: typing 4s steps(45, end), blink-caret 0.75s step-end infinite;
-    width: 0;
+    width: 38ch; /* Fixed width matching text length */
+    animation: typing 5s steps(38, end), blink-caret 0.75s step-end infinite;
   }
 
   @keyframes typing {
     from { width: 0; }
-    to { width: 32ch; } /* Adjusted for exact text length */
+    to { width: 38ch; }
   }
 
   @keyframes blink-caret {
@@ -64,11 +58,12 @@
     50% { border-color: #004E64; }
   }
 
+  /* Responsive for mobile */
   @media (max-width: 600px) {
     .typewriter {
-      font-size: 1.1rem;
-      animation: typing 4s steps(45, end), blink-caret 0.75s step-end infinite;
-      width: 32ch;
+      font-size: 1.2rem;
+      width: 38ch; /* keep fixed width */
+      animation: typing 6s steps(38, end), blink-caret 0.75s step-end infinite;
     }
   }
 </style>
@@ -85,8 +80,9 @@
 </header>
 
 <main>
+  <h2>Research</h2>
   <div class="typewriter-container">
-    <div class="typewriter">Research and journals will be published soon. Thank you!</div>
+    <div class="typewriter">Research and journal will be published soon. Thank you!</div>
   </div>
 </main>
 
