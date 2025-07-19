@@ -3,98 +3,418 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Saugat Panta | Research</title>
+<title>Saugat Panta | Research and Journals</title>
 <style>
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    margin: 2rem;
-    background: #FDF8F3;
-    color: #004E64;
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+  :root {
+    --color1: #596E79;
+    --color2: #142850;
+    --color3: #2B3A55;
+    --color4: #334257;
+    --color5: #213555;
+    --light: #FFFFFF;
+    --transition-time: 0.4s;
+  }
+
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body, html {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: var(--color2);
+    color: var(--light);
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Canvas full screen */
+  #star-canvas {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0;
+    background: radial-gradient(ellipse at center, #334257 0%, #142850 80%);
+  }
+
+  /* Falling stars */
+  .shooting-star {
+    position: fixed;
+    width: 3px;
+    height: 100px;
+    background: linear-gradient(-45deg, #fff, #ccc, #fff);
+    border-radius: 50%;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 4px #fff);
+    animation: fall linear forwards;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes fall {
+    0% {transform: translateY(-150%) translateX(0) scaleX(1);}
+    100% {transform: translateY(120vh) translateX(50vw) scaleX(0);}
+    opacity: 0;
+  }
+
+  /* Bright light/glow center */
+  #glow {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 80%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    filter: blur(60px);
+    animation: pulseGlow 4s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  @keyframes pulseGlow {
+    0% {opacity: 0.4;}
+    100% {opacity: 1;}
+  }
+
+  /* Container for content */
+  .content {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-  }
-  header {
-    background: #004E64;
-    color: white;
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 0;
-    font-weight: 600;
-  }
-  nav a {
-    color: white;
-    margin-left: 1.5rem;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  nav a:hover {
-    color: #F25C54;
-  }
-  main {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 2rem;
+    justify-content: center;
+    text-align: center;
   }
+
+  /* Welcome text with banger animation */
   .animated-text {
-    font-size: 1.8rem;
+    font-size: 3.4rem;
     font-weight: 700;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.25rem;
+    color: var(--color5);
+    text-shadow:
+      0 0 10px #fff,
+      0 0 20px #4db8ff,
+      0 0 30px #4db8ff,
+      0 0 40px #4db8ff,
+      0 0 55px #1e90ff,
+      0 0 75px #1e90ff;
+    animation: bangerGlow 2.5s ease-in-out infinite alternate;
   }
-  .animated-text span {
+
+  @keyframes bangerGlow {
+    0% {text-shadow:
+      0 0 5px #fff,
+      0 0 10px #6fc3ff,
+      0 0 20px #6fc3ff,
+      0 0 30px #6fc3ff,
+      0 0 40px #5dc1ff,
+      0 0 60px #5dc1ff;}
+    100% {text-shadow:
+      0 0 20px #fff,
+      0 0 30px #38a7ff,
+      0 0 50px #38a7ff,
+      0 0 70px #2d90ff,
+      0 0 100px #1f7cff,
+      0 0 150px #1f7cff;}
+  }
+
+  /* Paragraph style with fade-in */
+  .content p {
+    font-size: 1.8rem;
+    max-width: 600px;
+    line-height: 1.5;
+    color: var(--light);
+    text-shadow: 0 0 8px #0008;
+    animation: fadeInUp 2s ease forwards;
     opacity: 0;
-    animation: fadeInWord 0.5s forwards;
-  }
-  /* Stagger animation for each word */
-  .animated-text span:nth-child(1) { animation-delay: 0s; }
-  .animated-text span:nth-child(2) { animation-delay: 0.5s; }
-  .animated-text span:nth-child(3) { animation-delay: 1s; }
-  .animated-text span:nth-child(4) { animation-delay: 1.5s; }
-  .animated-text span:nth-child(5) { animation-delay: 2s; }
-  .animated-text span:nth-child(6) { animation-delay: 2.5s; }
-  .animated-text span:nth-child(7) { animation-delay: 3s; }
-  .animated-text span:nth-child(8) { animation-delay: 3.5s; }
-
-  @keyframes fadeInWord {
-    to { opacity: 1; }
+    animation-delay: 1s;
   }
 
-  @media (max-width: 600px) {
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Nepali time and English date container */
+  .time-date-container {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--light);
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 10;
+    user-select: none;
+    text-shadow: 0 0 5px #000a;
+  }
+
+  .clock {
+    font-size: 1.6rem;
+    animation: pulseText 3s ease-in-out infinite alternate;
+  }
+
+  .date {
+    font-size: 1.2rem;
+    opacity: 0.75;
+  }
+
+  @keyframes pulseText {
+    0% {opacity: 0.7;}
+    100% {opacity: 1;}
+  }
+
+  /* Three dot menu styling */
+  .three-dot-menu {
+    position: fixed;
+    top: 1.2rem;
+    right: 2rem;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .three-dot-menu span {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: var(--light);
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .three-dot-menu:hover span {
+    background: #4db8ff;
+  }
+
+  /* Dropdown menu */
+  .dropdown-menu {
+    position: fixed;
+    top: 3.8rem;
+    right: 1.6rem;
+    background: var(--color4);
+    border-radius: 8px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+    min-width: 180px;
+    z-index: 20;
+    overflow: hidden;
+  }
+
+  .dropdown-menu.active {
+    display: flex;
+    animation: dropdownFade 0.3s ease forwards;
+  }
+
+  @keyframes dropdownFade {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  .dropdown-menu a {
+    padding: 1rem 1.5rem;
+    color: var(--light);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid #49617f;
+    transition: background-color 0.3s ease;
+  }
+  .dropdown-menu a:last-child {
+    border-bottom: none;
+  }
+  .dropdown-menu a:hover,
+  .dropdown-menu a:focus {
+    background: #4db8ff;
+    color: #142850;
+    outline: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
     .animated-text {
-      font-size: 1.3rem;
-      justify-content: center;
+      font-size: 2.4rem;
+      letter-spacing: 0.15rem;
+    }
+    .content p {
+      font-size: 1.4rem;
+      max-width: 90vw;
     }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Saugat Panta</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="blogs.html">Blogs</a>
-    <a href="research.html">Research</a>
-  </nav>
-</header>
+<canvas id="star-canvas"></canvas>
+<div id="glow"></div>
 
-<main>
-  <div class="animated-text" aria-label="Research announcement">
-    <span>Research</span>
-    <span>and</span>
-    <span>journals</span>
-    <span>will</span>
-    <span>be</span>
-    <span>published</span>
-    <span>soon.</span>
-    <span>Thank you!</span>
-  </div>
-</main>
+<div class="time-date-container" aria-label="Current time and date">
+  <div class="clock" id="nepali-time" aria-live="polite"></div>
+  <div class="date" id="english-date" aria-live="polite"></div>
+</div>
+
+<div class="three-dot-menu" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-label="Open navigation menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<nav class="dropdown-menu" aria-label="Main navigation menu">
+  <a href="index.html">Home</a>
+  <a href="blogs.html">Blog</a>
+  <a href="research.html" aria-current="page">Research & Journals</a>
+  <a href="cv.html">CV</a>
+  <a href="trading.html">Trading Insight</a>
+  <a href="contact.html">Contact Me</a>
+</nav>
+
+<div class="content" role="main">
+  <h1 class="animated-text" aria-label="Research and journals will be published soon">Research<br>and<br>journals<br>will<br>be<br>published<br>soon.<br>Thank you!</h1>
+  <p>Thank you for your interest! Please check back later for detailed research publications and journals.</p>
+</div>
+
+<script>
+  // Star canvas animation
+  const canvas = document.getElementById('star-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let stars = [];
+
+  function initCanvas() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+
+  class Star {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.size = Math.random() * 1.2 + 0.3;
+      this.speed = Math.random() * 0.05 + 0.02;
+      this.alpha = Math.random() * 0.8 + 0.2;
+      this.direction = Math.random() > 0.5 ? 1 : -1;
+    }
+    update() {
+      this.alpha += 0.01 * this.direction;
+      if (this.alpha <= 0.2 || this.alpha >= 1) this.direction *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${this.alpha.toFixed(2)})`;
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.7)';
+      ctx.shadowBlur = 6;
+      ctx.fill();
+    }
+  }
+
+  function createStars(count) {
+    stars = [];
+    for(let i=0; i<count; i++) {
+      stars.push(new Star());
+    }
+  }
+
+  function animateStars() {
+    ctx.clearRect(0,0,width,height);
+    for(let star of stars) {
+      star.update();
+      star.draw();
+    }
+    requestAnimationFrame(animateStars);
+  }
+
+  // Falling stars
+  function createShootingStar() {
+    const star = document.createElement('div');
+    star.classList.add('shooting-star');
+    star.style.top = Math.random() * window.innerHeight * 0.5 + 'px';
+    star.style.left = Math.random() * window.innerWidth * 0.9 + 'px';
+    star.style.animationDuration = (Math.random() * 1 + 0.7) + 's';
+    document.body.appendChild(star);
+    star.addEventListener('animationend', () => star.remove());
+  }
+
+  // Generate shooting stars randomly
+  function shootingStarLoop() {
+    const delay = Math.random() * 4000 + 2000;
+    setTimeout(() => {
+      createShootingStar();
+      shootingStarLoop();
+    }, delay);
+  }
+
+  // Nepali Time & English Date
+  function updateNepaliTime() {
+    const now = new Date();
+    const options = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    document.getElementById('nepali-time').textContent = `Nepali Time: ${now.toLocaleTimeString('en-NP', options)}`;
+  }
+  function updateEnglishDate() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('english-date').textContent = now.toLocaleDateString('en-US', options);
+  }
+  setInterval(updateNepaliTime, 1000);
+  updateNepaliTime();
+  updateEnglishDate();
+
+  // Initialize canvas and stars
+  function init() {
+    initCanvas();
+    createStars(150);
+    animateStars();
+    shootingStarLoop();
+  }
+
+  window.addEventListener('resize', () => {
+    initCanvas();
+  });
+
+  init();
+
+  // Three dot menu toggle
+  const menuBtn = document.querySelector('.three-dot-menu');
+  const dropdown = document.querySelector('.dropdown-menu');
+
+  menuBtn.addEventListener('click', () => {
+    const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', !expanded);
+    dropdown.classList.toggle('active');
+  });
+
+  // Accessibility: toggle menu with keyboard (Enter or Space)
+  menuBtn.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      menuBtn.click();
+    }
+  });
+</script>
 
 </body>
 </html>
