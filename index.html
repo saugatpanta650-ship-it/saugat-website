@@ -7,407 +7,300 @@
 <style>
   /* Color Palette */
   :root {
-    --color1: #596E79;
-    --color2: #142850;
-    --color3: #2B3A55;
-    --color4: #334257;
-    --color5: #213555;
-    --white: #F0F4F8;
-    --accent: #F25C54;
+    --bg-dark: #142850;
+    --star-white: #E1E8F0;
+    --text-light: #F0F4F8;
+    --text-muted: #A0AEC0;
+    --accent: #596E79;
   }
-
-  /* Reset */
+  /* Reset & base */
   * {
     box-sizing: border-box;
   }
   body, html {
     margin: 0; padding: 0;
     height: 100%;
-    overflow: hidden;
+    background: var(--bg-dark);
+    color: var(--text-light);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--color2);
-    color: var(--white);
-    user-select: none;
+    overflow-x: hidden;
   }
 
-  /* Fullscreen container */
-  #container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: var(--color2);
-  }
-
-  /* Starry background canvas */
-  canvas#stars {
+  /* Canvas for stars */
+  #star-canvas {
     position: fixed;
     top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
+    width: 100vw; height: 100vh;
     z-index: 0;
-    background: radial-gradient(circle at center, #213555, #000000 90%);
+    pointer-events: none;
   }
 
-  /* Falling star canvas */
-  canvas#fallingStars {
+  /* Falling stars container behind text, but never over it */
+  #falling-stars {
     position: fixed;
     top: 0; left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw; height: 70vh; /* limited height so no falling over text */
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
+  }
+
+  .falling-star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 3px white);
+    animation-name: fall;
+    animation-timing-function: linear;
+  }
+  @keyframes fall {
+    0% {
+      transform: translateY(-10px) translateX(0);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(110vh) translateX(20px);
+      opacity: 0;
+    }
   }
 
   /* Time & Date container */
-  #timeDate {
+  .time-date-container {
     position: fixed;
-    top: 20px; right: 20px;
+    top: 15px;
+    right: 20px;
     text-align: right;
     font-weight: 600;
-    font-size: 1.3rem;
-    color: var(--color1);
     z-index: 10;
-    text-shadow: 0 0 5px var(--color1);
+    user-select: none;
   }
-  #timeDate .time {
-    animation: pulse 3s ease-in-out infinite;
+  .clock {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    display: inline-block;
+    animation: wave 4s ease-in-out infinite;
   }
-
-  @keyframes pulse {
-    0%, 100% {
-      text-shadow: 0 0 8px var(--accent);
-      color: var(--accent);
-    }
-    50% {
-      text-shadow: 0 0 2px var(--color1);
-      color: var(--color1);
-    }
-  }
-
-  #timeDate .date {
+  .date {
     font-size: 1rem;
-    color: var(--white);
-    opacity: 0.7;
-    margin-top: 4px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  @keyframes wave {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
   }
 
   /* Welcome text container */
-  #welcomeMessage {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 900px;
-    padding: 2rem 3rem;
-    background: rgba(33, 53, 85, 0.7);
-    border-radius: 15px;
-    box-shadow: 0 0 20px var(--accent);
-    text-align: center;
+  #welcome-text {
+    position: relative;
     z-index: 5;
+    max-width: 700px;
+    margin: 0 auto;
+    top: 35vh;
+    padding: 0 1rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideIn 2.5s ease forwards;
   }
-  #welcomeMessage h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    color: var(--accent);
-    letter-spacing: 3px;
-    animation: glowPulse 3s ease-in-out infinite;
-  }
-  #welcomeMessage p {
-    font-size: 1.3rem;
-    line-height: 1.6;
-    color: var(--white);
-    text-shadow: 0 0 10px #0008;
-    animation: fadeSlideIn 2s ease forwards;
-  }
-
-  /* Glow pulse animation on heading */
-  @keyframes glowPulse {
-    0%, 100% {
-      text-shadow:
-        0 0 10px var(--accent),
-        0 0 30px var(--accent),
-        0 0 60px var(--accent);
-      color: var(--accent);
-    }
-    50% {
-      text-shadow:
-        0 0 3px var(--color1),
-        0 0 8px var(--color1),
-        0 0 15px var(--color1);
-      color: var(--color1);
-    }
-  }
-
-  /* Fade and slide in for paragraph */
   @keyframes fadeSlideIn {
-    0% {
-      opacity: 0;
-      transform: translateY(40px) scale(0.9);
-    }
-    100% {
+    to {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
   }
-
-  /* 3-dot menu button */
-  #menuToggle {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 48px;
-    height: 48px;
-    z-index: 20;
-    cursor: pointer;
+  #welcome-text h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
   }
-  #menuToggle .dot {
-    width: 10px;
-    height: 10px;
-    background: var(--accent);
-    border-radius: 50%;
-    margin: 6px 0;
-    transition: background-color 0.3s ease;
-  }
-  #menuToggle:hover .dot {
-    background: var(--color1);
+  #welcome-text p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
   }
 
-  /* Navigation popup */
-  #navPopup {
+  /* 3-dot menu styling */
+  #menu {
     position: fixed;
-    bottom: 90px;
-    right: 30px;
-    background: rgba(33, 53, 85, 0.85);
-    border-radius: 10px;
-    box-shadow: 0 0 25px var(--accent);
-    padding: 12px 24px;
-    display: none;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    display: flex;
     flex-direction: column;
-    gap: 15px;
-    z-index: 30;
-    min-width: 180px;
+    gap: 12px;
   }
-  #navPopup a {
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    padding: 8px 10px;
-    border-radius: 8px;
-    transition: background 0.3s ease;
+  .dot {
+    width: 16px;
+    height: 16px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 8px var(--accent);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
-  #navPopup a:hover {
+  .dot:hover {
+    background-color: var(--text-light);
+    box-shadow: 0 0 12px var(--text-light);
+  }
+  /* Tooltip for dots */
+  .dot[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 35px;
     background: var(--accent);
-    color: var(--color5);
-  }
-
-  /* Scrollbar hidden */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  /* For Firefox */
-  body {
-    scrollbar-width: none;
+    color: var(--text-light);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    user-select: none;
   }
 
 </style>
 </head>
 <body>
 
-<div id="container">
-  <canvas id="stars"></canvas>
-  <canvas id="fallingStars"></canvas>
+<!-- Star canvas -->
+<canvas id="star-canvas"></canvas>
 
-  <div id="timeDate">
-    <div class="time" id="nepaliTime">Loading time...</div>
-    <div class="date" id="englishDate">Loading date...</div>
-  </div>
+<!-- Falling stars -->
+<div id="falling-stars"></div>
 
-  <div id="welcomeMessage" role="main" aria-label="Welcome message">
-    <h1>Welcome</h1>
-    <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance. This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts! On this website, you can also explore my professional background and get insights into trading and investment strategies. Feel free to browse around!</p>
-  </div>
+<!-- Time and date -->
+<div class="time-date-container">
+  <div class="clock" id="nepali-time">--:--:--</div>
+  <div class="date" id="english-date">Loading date...</div>
+</div>
 
-  <div id="menuToggle" aria-label="Open navigation menu" role="button" tabindex="0">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
+<!-- Welcome Text -->
+<div id="welcome-text" aria-live="polite" aria-atomic="true" role="region">
+  <h1>Welcome</h1>
+  <p>Hello! I’m Saugat Panta, a 2nd Year MBBS student passionate about medicine and finance. This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts! On this website, you can also explore my professional background and get insights into trading and investment strategies. Feel free to browse around!</p>
+</div>
 
-  <nav id="navPopup" aria-label="Site navigation">
-    <a href="index.html">Home</a>
-    <a href="blogs.html">Blog</a>
-    <a href="research.html">Research & Journals</a>
-    <a href="cv.html">CV</a>
-    <a href="trading.html">Trading Insights</a>
-    <a href="contact.html">Contact Me</a>
-  </nav>
+<!-- 3-dot menu -->
+<div id="menu" role="navigation" aria-label="Page navigation">
+  <div class="dot" data-tooltip="Home" onclick="navigateTo('home')"></div>
+  <div class="dot" data-tooltip="Blog" onclick="navigateTo('blog')"></div>
+  <div class="dot" data-tooltip="Research" onclick="navigateTo('research')"></div>
+  <div class="dot" data-tooltip="CV" onclick="navigateTo('cv')"></div>
+  <div class="dot" data-tooltip="Trading Insight" onclick="navigateTo('trading')"></div>
+  <div class="dot" data-tooltip="Contact Me" onclick="navigateTo('contact')"></div>
 </div>
 
 <script>
-  // ------------- Time & Date -------------------
+  // Star canvas setup
+  const canvas = document.getElementById('star-canvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  const maxStars = 120;
+
+  function randomRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function createStars() {
+    stars = [];
+    for(let i=0; i<maxStars; i++) {
+      stars.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        radius: Math.random() * 1.2,
+        alpha: Math.random(),
+        alphaChange: 0.005 + Math.random() * 0.01
+      });
+    }
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    stars.forEach(star => {
+      star.alpha += star.alphaChange;
+      if(star.alpha <= 0) {
+        star.alpha = 0;
+        star.alphaChange = -star.alphaChange;
+      }
+      else if(star.alpha >= 1) {
+        star.alpha = 1;
+        star.alphaChange = -star.alphaChange;
+      }
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+      ctx.shadowColor = 'white';
+      ctx.shadowBlur = 4;
+      ctx.fill();
+    });
+  }
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    createStars();
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function animate() {
+    drawStars();
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Falling stars
+  const fallingStarsContainer = document.getElementById('falling-stars');
+  const maxFallingStars = 6;
+  let fallingStars = [];
+
+  function createFallingStar() {
+    const star = document.createElement('div');
+    star.classList.add('falling-star');
+    const size = randomRange(1, 3);
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    star.style.left = `${randomRange(0, window.innerWidth)}px`;
+    star.style.top = `-10px`;
+    star.style.animationDuration = `${randomRange(4000, 7000)}ms`;
+    star.style.animationDelay = `${randomRange(0, 7000)}ms`;
+    fallingStarsContainer.appendChild(star);
+    fallingStars.push(star);
+
+    // Remove star after animation
+    star.addEventListener('animationend', () => {
+      fallingStarsContainer.removeChild(star);
+      fallingStars = fallingStars.filter(s => s !== star);
+    });
+  }
+
+  setInterval(() => {
+    if(fallingStars.length < maxFallingStars) {
+      createFallingStar();
+    }
+  }, 1500);
+
+  // Time & Date logic
   function updateNepaliTime() {
     const now = new Date();
     const options = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    const nepaliTime = now.toLocaleTimeString('ne-NP', options);
-    document.getElementById('nepaliTime').textContent = "Nepali Time: " + nepaliTime;
+    document.getElementById('nepali-time').textContent = now.toLocaleTimeString('en-NP', options);
   }
   function updateEnglishDate() {
     const now = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('englishDate').textContent = now.toLocaleDateString('en-US', options);
+    document.getElementById('english-date').textContent = now.toLocaleDateString('en-US', options);
   }
+  setInterval(updateNepaliTime, 1000);
   updateNepaliTime();
   updateEnglishDate();
-  setInterval(updateNepaliTime, 1000);
 
-  // ----------- 3-dot menu toggle -------------
-  const menuToggle = document.getElementById('menuToggle');
-  const navPopup = document.getElementById('navPopup');
-  let menuOpen = false;
-
-  function toggleMenu() {
-    menuOpen = !menuOpen;
-    navPopup.style.display = menuOpen ? 'flex' : 'none';
+  // Navigation function placeholder
+  function navigateTo(page) {
+    alert(`Navigation to "${page}" page will be implemented in your multi-page setup.`);
   }
-
-  menuToggle.addEventListener('click', toggleMenu);
-  menuToggle.addEventListener('keydown', e => {
-    if(e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleMenu();
-    }
-  });
-
-  // ------------- Starfield animation -------------------
-  const starsCanvas = document.getElementById('stars');
-  const starsCtx = starsCanvas.getContext('2d');
-  const fallingStarsCanvas = document.getElementById('fallingStars');
-  const fallingCtx = fallingStarsCanvas.getContext('2d');
-
-  let stars = [];
-  let fallingStars = [];
-
-  function initCanvas() {
-    starsCanvas.width = window.innerWidth;
-    starsCanvas.height = window.innerHeight;
-    fallingStarsCanvas.width = window.innerWidth;
-    fallingStarsCanvas.height = window.innerHeight;
-  }
-
-  function random(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-  // Star object
-  class Star {
-    constructor() {
-      this.x = Math.random() * starsCanvas.width;
-      this.y = Math.random() * starsCanvas.height;
-      this.radius = Math.random() * 1.1 + 0.3;
-      this.alpha = random(0.3, 1);
-      this.alphaChange = 0.005 * (Math.random() < 0.5 ? 1 : -1);
-      this.color = `rgba(255,255,255,${this.alpha})`;
-    }
-    update() {
-      this.alpha += this.alphaChange;
-      if (this.alpha <= 0.3 || this.alpha >= 1) this.alphaChange *= -1;
-      this.color = `rgba(255,255,255,${this.alpha.toFixed(2)})`;
-    }
-    draw(ctx) {
-      ctx.beginPath();
-      ctx.fillStyle = this.color;
-      ctx.shadowColor = 'white';
-      ctx.shadowBlur = 4;
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  // Falling star object
-  class FallingStar {
-    constructor() {
-      this.reset();
-    }
-    reset() {
-      this.x = Math.random() * fallingStarsCanvas.width;
-      this.y = random(-100, -10);
-      this.len = random(80, 150);
-      this.speed = random(4, 8);
-      this.angle = Math.PI / 4;
-      this.opacity = 1;
-      this.fadeSpeed = 0.01;
-    }
-    update() {
-      this.x += this.speed * Math.cos(this.angle);
-      this.y += this.speed * Math.sin(this.angle);
-      this.opacity -= this.fadeSpeed;
-      if (this.opacity <= 0) this.reset();
-    }
-    draw(ctx) {
-      ctx.beginPath();
-      ctx.moveTo(this.x, this.y);
-      ctx.lineTo(this.x - this.len * Math.cos(this.angle), this.y - this.len * Math.sin(this.angle));
-      ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
-      ctx.lineWidth = 2;
-      ctx.shadowColor = 'white';
-      ctx.shadowBlur = 8;
-      ctx.stroke();
-
-      // Bright head of falling star
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-      ctx.shadowColor = 'white';
-      ctx.shadowBlur = 15;
-      ctx.fill();
-    }
-  }
-
-  // Initialize stars
-  function initStars() {
-    stars = [];
-    for(let i=0; i<200; i++) {
-      stars.push(new Star());
-    }
-    fallingStars = [];
-    for(let i=0; i<5; i++) {
-      fallingStars.push(new FallingStar());
-    }
-  }
-
-  // Animation loop
-  function animate() {
-    starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
-    fallingCtx.clearRect(0, 0, fallingStarsCanvas.width, fallingStarsCanvas.height);
-
-    stars.forEach(star => {
-      star.update();
-      star.draw(starsCtx);
-    });
-
-    fallingStars.forEach(fstar => {
-      fstar.update();
-      fstar.draw(fallingCtx);
-    });
-
-    requestAnimationFrame(animate);
-  }
-
-  // On window resize
-  window.addEventListener('resize', () => {
-    initCanvas();
-    initStars();
-  });
-
-  // Init on load
-  initCanvas();
-  initStars();
-  animate();
-
 </script>
 
 </body>
