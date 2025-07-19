@@ -9,8 +9,8 @@
   :root {
     --bg-dark: #142850;
     --star-white: #E1E8F0;
-    --text-light: #CED7E0;
-    --text-muted: #9AA7B0;
+    --text-light: #F0F4F8;
+    --text-muted: #9AA7B0; /* cool grey */
     --accent: #596E79;
   }
   /* Reset & base */
@@ -21,7 +21,7 @@
     margin: 0; padding: 0;
     height: 100%;
     background: var(--bg-dark);
-    color: var(--text-muted);
+    color: var(--text-light);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
   }
@@ -76,7 +76,7 @@
   }
   .clock {
     font-size: 1.5rem;
-    color: var(--text-light);
+    color: var(--text-muted);
     display: inline-block;
     animation: wave 4s ease-in-out infinite;
   }
@@ -99,24 +99,28 @@
     top: 35vh;
     padding: 0 1rem;
     text-align: center;
-    color: var(--text-muted);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideIn 2.5s ease forwards;
   }
-
+  @keyframes fadeSlideIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   #welcome-text h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: var(--text-light);
+    color: var(--text-muted);
     letter-spacing: 0.1em;
   }
-
   #welcome-text p {
     font-size: 1.25rem;
     line-height: 1.6;
+    color: var(--text-muted);
     max-width: 600px;
     margin: 0 auto;
-    overflow: hidden;
-    display: inline-block;
-    white-space: normal;
   }
 
   /* Animation for each word fade-in */
@@ -127,8 +131,9 @@
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
     animation-duration: 0.5s;
+    color: var(--text-muted);
+    margin-right: 0.25em;  /* space between words */
   }
-
   @keyframes fadeInWord {
     to {
       opacity: 1;
@@ -155,8 +160,8 @@
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
   .dot:hover {
-    background-color: var(--text-light);
-    box-shadow: 0 0 12px var(--text-light);
+    background-color: var(--text-muted);
+    box-shadow: 0 0 12px var(--text-muted);
   }
   /* Tooltip for dots */
   .dot[data-tooltip]:hover::after {
@@ -171,7 +176,6 @@
     white-space: nowrap;
     user-select: none;
   }
-
 </style>
 </head>
 <body>
@@ -183,7 +187,7 @@
 <div id="falling-stars"></div>
 
 <!-- Time and date -->
-<div class="time-date-container">
+<div class="time-date-container" role="contentinfo" aria-label="Current time and date">
   <div class="clock" id="nepali-time">--:--:--</div>
   <div class="date" id="english-date">Loading date...</div>
 </div>
@@ -309,7 +313,7 @@
   updateNepaliTime();
   updateEnglishDate();
 
-  // Animate welcome paragraph words fade-in one by one
+  // Animate welcome text word by word
   function animateWelcomeText() {
     const p = document.querySelector('#welcome-text p');
     const text = p.textContent.trim();
@@ -319,13 +323,15 @@
 
     words.forEach((word, i) => {
       const span = document.createElement('span');
-      span.textContent = word + ' ';
+      span.textContent = word;
       span.classList.add('word');
       span.style.animationDelay = `${i * 300}ms`;
       p.appendChild(span);
+      if (i !== words.length - 1) {
+        p.appendChild(document.createTextNode(' ')); // add normal space between words
+      }
     });
   }
-
   animateWelcomeText();
 
   // Navigation function placeholder
