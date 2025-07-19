@@ -1,891 +1,412 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Saugat Panta | Personal Website</title>
-  <style>
-    :root {
-      --background-light: #FDF8F3;
-      --background-dark: #121212;
-      --primary-light: #004E64;
-      --primary-dark: #0F9D58;
-      --secondary-light: #F25C54;
-      --secondary-dark: #FF7043;
-      --success: #719949;
-      --danger: #B33030;
-      --text-main-light: #2D2D2D;
-      --text-main-dark: #E0E0E0;
-      --text-muted-light: #7D8B91;
-      --text-muted-dark: #AAAAAA;
-      --border-light: #E2DCD3;
-      --border-dark: #333333;
-      --transition-time: 0.4s;
-      --brain-glow-light: #0d6efd;
-      --brain-glow-dark: #64b5f6;
-      --confetti-colors: #f44336, #ffeb3b, #4caf50, #2196f3, #ff9800;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Saugat Panta | Welcome</title>
+<style>
+  /* Color Palette */
+  :root {
+    --color1: #596E79;
+    --color2: #142850;
+    --color3: #2B3A55;
+    --color4: #334257;
+    --color5: #213555;
+    --white: #F0F4F8;
+    --accent: #F25C54;
+  }
 
-    /* Reset */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      margin: 0;
-      background: var(--background-light);
-      color: var(--text-main-light);
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      transition: background 0.5s, color 0.5s;
-      overflow-x: hidden;
-    }
-    body.dark {
-      background: var(--background-dark);
-      color: var(--text-main-dark);
-    }
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--color2);
+    color: var(--white);
+    user-select: none;
+  }
 
-    /* TIME & DATE DISPLAY */
-    .time-date-container {
-      position: relative;
-      text-align: center;
-      padding: 1rem 0;
-      background: #fff7ed;
-      animation: slideScaleIn 1s ease-out;
-      z-index: 999;
-      transition: background 0.5s, color 0.5s;
-    }
-    body.dark .time-date-container {
-      background: #222;
-      color: var(--text-main-dark);
-    }
-    .clock {
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #2ECC71; /* Emerald Green */
-      animation: wave 2.5s ease-in-out infinite;
-    }
-    body.dark .clock {
-      color: #66ff99;
-    }
-    .date {
-      font-size: 1rem;
-      color: #7D8B91;
-      margin-top: 0.2rem;
-    }
-    body.dark .date {
-      color: #999;
-    }
-    @keyframes slideScaleIn {
-      0% {
-        transform: scale(0.8) translateY(-30px);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-      }
-    }
-    @keyframes wave {
-      0%, 100% {
-        transform: rotate(-1deg);
-      }
-      50% {
-        transform: rotate(1deg);
-      }
-    }
+  /* Fullscreen container */
+  #container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--color2);
+  }
 
-    header {
-      background: var(--primary-light);
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      transition: background 0.5s;
-    }
-    body.dark header {
-      background: var(--primary-dark);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.7);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-      letter-spacing: 1.5px;
-      font-weight: 700;
-      cursor: default;
-      user-select: none;
-    }
-    nav {
-      margin-top: 0.5rem;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 1.5rem;
-      font-weight: 600;
-      font-size: 1rem;
-      position: relative;
-      padding-bottom: 2px;
-      transition: color var(--transition-time);
-    }
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: var(--secondary-light);
-      transition: width var(--transition-time);
-    }
-    nav a:hover,
-    nav a:focus {
-      color: var(--secondary-light);
-    }
-    nav a:hover::after,
-    nav a:focus::after {
-      width: 100%;
-    }
-    body.dark nav a::after {
-      background: var(--secondary-dark);
-    }
-    body.dark nav a:hover,
-    body.dark nav a:focus {
-      color: var(--secondary-dark);
-    }
+  /* Starry background canvas */
+  canvas#stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    background: radial-gradient(circle at center, #213555, #000000 90%);
+  }
 
-    main {
-      max-width: 900px;
-      margin: 3rem auto 4rem;
-      background: white;
-      padding: 2rem 3rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-      border-radius: 12px;
-      border: 1px solid var(--border-light);
-      transition: background 0.5s, border-color 0.5s, color 0.5s;
-    }
-    body.dark main {
-      background: #1a1a1a;
-      border-color: var(--border-dark);
-      color: var(--text-main-dark);
-    }
+  /* Falling star canvas */
+  canvas#fallingStars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
 
-    section {
-      margin-bottom: 5rem;
+  /* Time & Date container */
+  #timeDate {
+    position: fixed;
+    top: 20px; right: 20px;
+    text-align: right;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--color1);
+    z-index: 10;
+    text-shadow: 0 0 5px var(--color1);
+  }
+  #timeDate .time {
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      text-shadow: 0 0 8px var(--accent);
+      color: var(--accent);
+    }
+    50% {
+      text-shadow: 0 0 2px var(--color1);
+      color: var(--color1);
+    }
+  }
+
+  #timeDate .date {
+    font-size: 1rem;
+    color: var(--white);
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+
+  /* Welcome text container */
+  #welcomeMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 900px;
+    padding: 2rem 3rem;
+    background: rgba(33, 53, 85, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 0 20px var(--accent);
+    text-align: center;
+    z-index: 5;
+  }
+  #welcomeMessage h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+  #welcomeMessage p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: var(--white);
+    text-shadow: 0 0 10px #0008;
+    animation: fadeSlideIn 2s ease forwards;
+  }
+
+  /* Glow pulse animation on heading */
+  @keyframes glowPulse {
+    0%, 100% {
+      text-shadow:
+        0 0 10px var(--accent),
+        0 0 30px var(--accent),
+        0 0 60px var(--accent);
+      color: var(--accent);
+    }
+    50% {
+      text-shadow:
+        0 0 3px var(--color1),
+        0 0 8px var(--color1),
+        0 0 15px var(--color1);
+      color: var(--color1);
+    }
+  }
+
+  /* Fade and slide in for paragraph */
+  @keyframes fadeSlideIn {
+    0% {
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      transform: translateY(40px) scale(0.9);
     }
-    section.visible {
+    100% {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
-    h2 {
-      border-bottom: 3px solid var(--primary-light);
-      padding-bottom: 0.3rem;
-      margin-bottom: 1rem;
-      color: var(--primary-light);
-      font-weight: 700;
-      user-select: none;
-    }
-    body.dark h2 {
-      border-color: var(--primary-dark);
-      color: var(--primary-dark);
-    }
-    h3 {
-      margin-top: 2rem;
-      color: var(--secondary-light);
-      font-weight: 600;
-    }
-    body.dark h3 {
-      color: var(--secondary-dark);
-    }
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    li {
-      margin-bottom: 0.6rem;
-      line-height: 1.5;
-    }
-    a {
-      color: var(--primary-light);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color var(--transition-time);
-    }
-    a:hover {
-      text-decoration: underline;
-      color: var(--secondary-light);
-    }
-    body.dark a {
-      color: var(--primary-dark);
-    }
-    body.dark a:hover {
-      color: var(--secondary-dark);
-    }
-    .contact-info p {
-      margin: 0.4rem 0;
-      font-weight: 600;
-    }
-    .small-text {
-      font-size: 0.9rem;
-      color: var(--text-muted-light);
-    }
-    body.dark .small-text {
-      color: var(--text-muted-dark);
-    }
+  }
 
-    /* Trading insights styling */
-    .news-article {
-      border-left: 4px solid var(--primary-light);
-      padding-left: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .news-article h4 {
-      margin: 0 0 0.3rem 0;
-      color: var(--secondary-light);
-    }
-    body.dark .news-article {
-      border-left-color: var(--primary-dark);
-    }
-    body.dark .news-article h4 {
-      color: var(--secondary-dark);
-    }
+  /* 3-dot menu button */
+  #menuToggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    z-index: 20;
+    cursor: pointer;
+  }
+  #menuToggle .dot {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin: 6px 0;
+    transition: background-color 0.3s ease;
+  }
+  #menuToggle:hover .dot {
+    background: var(--color1);
+  }
 
-    /* Contact form styling */
-    form {
-      max-width: 450px;
-      margin-top: 1rem;
-      position: relative;
-    }
-    label {
-      display: block;
-      margin-bottom: 0.3rem;
-      font-weight: 600;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 0.6rem 0.8rem;
-      margin-bottom: 1rem;
-      border: 1px solid var(--border-light);
-      border-radius: 6px;
-      font-size: 1rem;
-      font-family: inherit;
-      transition: border-color 0.3s ease;
-      background: white;
-      color: var(--text-main-light);
-    }
-    body.dark input, body.dark textarea {
-      background: #222;
-      color: var(--text-main-dark);
-      border-color: var(--border-dark);
-    }
-    input:focus, textarea:focus {
-      border-color: var(--secondary-light);
-      outline: none;
-      box-shadow: 0 0 6px var(--secondary-light);
-    }
-    body.dark input:focus, body.dark textarea:focus {
-      border-color: var(--secondary-dark);
-      box-shadow: 0 0 6px var(--secondary-dark);
-    }
-    button {
-      background: var(--primary-light);
-      color: white;
-      border: none;
-      padding: 0.7rem 1.5rem;
-      font-size: 1.1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background: var(--secondary-light);
-    }
-    body.dark button {
-      background: var(--primary-dark);
-    }
-    body.dark button:hover {
-      background: var(--secondary-dark);
-    }
+  /* Navigation popup */
+  #navPopup {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    background: rgba(33, 53, 85, 0.85);
+    border-radius: 10px;
+    box-shadow: 0 0 25px var(--accent);
+    padding: 12px 24px;
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 30;
+    min-width: 180px;
+  }
+  #navPopup a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+  }
+  #navPopup a:hover {
+    background: var(--accent);
+    color: var(--color5);
+  }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      main {
-        padding: 1.5rem 1.5rem;
-        margin: 1rem;
-      }
-      nav a {
-        margin-left: 1rem;
-        font-size: 0.95rem;
-      }
-    }
+  /* Scrollbar hidden */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  /* For Firefox */
+  body {
+    scrollbar-width: none;
+  }
 
-    /* Typing effect for welcome message */
-    #typing-welcome {
-      font-weight: 700;
-      font-size: 1.8rem;
-      min-height: 48px;
-      color: var(--primary-light);
-      user-select: none;
-      margin-bottom: 1rem;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid var(--primary-light);
-      animation: blink-caret 0.75s step-end infinite;
-      transition: color 0.5s;
-    }
-    body.dark #typing-welcome {
-      color: var(--primary-dark);
-      border-right-color: var(--primary-dark);
-    }
-
-    @keyframes blink-caret {
-      0%, 100% { border-color: transparent; }
-      50% { border-color: var(--primary-light); }
-    }
-    body.dark @keyframes blink-caret {
-      0%, 100% { border-color: transparent; }
-      50% { border-color: var(--primary-dark); }
-    }
-
-    /* Brain SVG Container */
-    .brain-container {
-      max-width: 350px;
-      margin: 2rem auto;
-      cursor: pointer;
-      perspective: 800px;
-      transition: transform 0.6s ease;
-      filter: drop-shadow(0 0 8px var(--brain-glow-light));
-    }
-    body.dark .brain-container {
-      filter: drop-shadow(0 0 10px var(--brain-glow-dark));
-    }
-    .brain-container:hover {
-      transform: rotateY(20deg) rotateX(8deg);
-      filter: drop-shadow(0 0 18px var(--secondary-light));
-    }
-
-    /* Tooltip bubbles for brain */
-    .tooltip {
-      position: fixed;
-      background: var(--primary-light);
-      color: white;
-      padding: 8px 14px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      max-width: 200px;
-      font-size: 0.9rem;
-      user-select: none;
-      z-index: 1000;
-    }
-    body.dark .tooltip {
-      background: var(--primary-dark);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
-    }
-
-    /* Timeline styling */
-    .timeline {
-      position: relative;
-      padding-left: 30px;
-      border-left: 3px solid var(--primary-light);
-      margin-bottom: 2rem;
-    }
-    body.dark .timeline {
-      border-left-color: var(--primary-dark);
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 1.8rem;
-      opacity: 0;
-      transform: translateX(-30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      cursor: pointer;
-    }
-    .timeline-item.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -14px;
-      top: 5px;
-      width: 10px;
-      height: 10px;
-      background: var(--secondary-light);
-      border-radius: 50%;
-      border: 3px solid var(--background-light);
-      transition: background 0.4s;
-    }
-    body.dark .timeline-item::before {
-      background: var(--secondary-dark);
-      border-color: var(--background-dark);
-    }
-    .timeline-item:hover::before {
-      background: var(--primary-light);
-      border-color: white;
-    }
-    .timeline-item h4 {
-      margin: 0;
-      color: var(--secondary-light);
-      font-weight: 700;
-    }
-    body.dark .timeline-item h4 {
-      color: var(--secondary-dark);
-    }
-    .timeline-item p {
-      margin: 0.2rem 0 0 0;
-      font-size: 0.9rem;
-      color: var(--text-muted-light);
-    }
-    body.dark .timeline-item p {
-      color: var(--text-muted-dark);
-    }
-
-    /* SVG Icons */
-    .icon {
-      vertical-align: middle;
-      width: 20px;
-      height: 20px;
-      fill: var(--primary-light);
-      transition: fill 0.4s;
-      margin-right: 6px;
-    }
-    body.dark .icon {
-      fill: var(--primary-dark);
-    }
-
-    /* Background particle animation */
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      pointer-events: none;
-      background: linear-gradient(120deg, #FDF8F3, #C9F1FF);
-      transition: background 0.5s;
-    }
-    body.dark #particles-js {
-      background: linear-gradient(120deg, #121212, #334455);
-    }
-
-    /* 3D parallax wrapper for brain */
-    .parallax-wrapper {
-      perspective: 900px;
-      max-width: 360px;
-      margin: 0 auto 2rem;
-    }
-  </style>
+</style>
 </head>
 <body>
 
-<!-- Background Particles -->
-<div id="particles-js"></div>
+<div id="container">
+  <canvas id="stars"></canvas>
+  <canvas id="fallingStars"></canvas>
 
-<!-- 🌟 TIME & DATE DISPLAY -->
-<div class="time-date-container" aria-live="polite" aria-atomic="true">
-  <div class="clock" id="nepali-time"></div>
-  <div class="date" id="english-date"></div>
+  <div id="timeDate">
+    <div class="time" id="nepaliTime">Loading time...</div>
+    <div class="date" id="englishDate">Loading date...</div>
+  </div>
+
+  <div id="welcomeMessage" role="main" aria-label="Welcome message">
+    <h1>Welcome</h1>
+    <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance. This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts! On this website, you can also explore my professional background and get insights into trading and investment strategies. Feel free to browse around!</p>
+  </div>
+
+  <div id="menuToggle" aria-label="Open navigation menu" role="button" tabindex="0">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <nav id="navPopup" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <a href="blogs.html">Blog</a>
+    <a href="research.html">Research & Journals</a>
+    <a href="cv.html">CV</a>
+    <a href="trading.html">Trading Insights</a>
+    <a href="contact.html">Contact Me</a>
+  </nav>
 </div>
 
-<header>
-  <h1>Saugat Panta</h1>
-  <nav aria-label="Main navigation">
-    <a href="index.html">Home</a>
-    <a href="blogs.html">Wanna be Writer</a>
-    <a href="research.html">Research</a>
-    <a href="#about">About Me</a>
-    <a href="#cv">CV</a>
-    <a href="#trading">Trading Insights</a>
-    <a href="#contact">Contact</a>
-    <button id="mode-toggle" aria-label="Toggle Dark/Light Mode" style="margin-left:1rem; font-weight:600; font-size:0.9rem; cursor:pointer; background:none; border:none; color:white;">
-      🌙
-    </button>
-  </nav>
-</header>
-
-<main>
-  <section id="home" tabindex="-1">
-    <div id="typing-welcome" aria-live="polite"></div>
-    <p>Hello! I’m <strong>Saugat Panta</strong>, a 2nd Year MBBS student passionate about medicine and finance.
-      This is where I will share my thoughts, updates, and reflections on medical topics, research experiences, journal summaries, blogs and more. Stay tuned for regular posts!
-      On this website, you can also explore my professional background and get insights into trading and investment strategies.  
-      Feel free to browse around!</p>
-
-    <!-- Interactive Brain Animation -->
-    <div class="parallax-wrapper">
-      <div class="brain-container" tabindex="0" role="img" aria-label="Interactive brain showing your skills and interests">
-        <svg id="brain-svg" viewBox="0 0 512 512" width="350" height="350" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" >
-          <g id="brain">
-            <!-- Simple shapes representing lobes -->
-            <ellipse id="frontal-lobe" cx="150" cy="150" rx="90" ry="120" fill="#5bc0de" fill-opacity="0.7" stroke="#004E64" stroke-width="3" style="cursor:pointer" />
-            <ellipse id="parietal-lobe" cx="280" cy="110" rx="80" ry="100" fill="#f25c54" fill-opacity="0.7" stroke="#b33030" stroke-width="3" style="cursor:pointer" />
-            <ellipse id="occipital-lobe" cx="280" cy="230" rx="70" ry="90" fill="#719949" fill-opacity="0.7" stroke="#2d2d2d" stroke-width="3" style="cursor:pointer" />
-            <ellipse id="temporal-lobe" cx="180" cy="290" rx="90" ry="110" fill="#f29e54" fill-opacity="0.7" stroke="#7d8b91" stroke-width="3" style="cursor:pointer" />
-          </g>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" tabindex="-1">
-    <h2>About Me</h2>
-    <p>
-      I’m Saugat Panta, a second-year MBBS student at Gandaki Medical College.  
-      I’m deeply interested in the field of medicine, especially research and turning passion into progress.
-    </p>
-  </section>
-
-  <section id="cv" tabindex="-1">
-    <h2>CV</h2>
-    <!-- Timeline -->
-    <div class="timeline" id="cv-timeline" role="list">
-      <div class="timeline-item" tabindex="0" role="listitem" aria-expanded="false" aria-controls="exp1-desc" id="exp1">
-        <h4>MBBS - Gandaki Medical College (2023–Present)</h4>
-        <p id="exp1-desc" hidden>
-          Currently studying MBBS at Gandaki Medical College, Pokhara.
-        </p>
-      </div>
-      <div class="timeline-item" tabindex="0" role="listitem" aria-expanded="false" aria-controls="exp2-desc" id="exp2">
-        <h4>+2 — Kathmandu Model Secondary School</h4>
-        <p id="exp2-desc" hidden>
-          Completed higher secondary education.
-        </p>
-      </div>
-      <div class="timeline-item" tabindex="0" role="listitem" aria-expanded="false" aria-controls="exp3-desc" id="exp3">
-        <h4>SEE — Future Star High School (2019)</h4>
-        <p id="exp3-desc" hidden>
-          Completed School Leaving Certificate in 2019.
-        </p>
-      </div>
-      <div class="timeline-item" tabindex="0" role="listitem" aria-expanded="false" aria-controls="exp4-desc" id="exp4">
-        <h4>Community Health Diagnosis Research</h4>
-        <p id="exp4-desc" hidden>
-          Participated in structured field-based research under Community Medicine Department at Gandaki Medical College.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="trading" tabindex="-1">
-    <h2>Trading Insights That Will Be Uploaded Here</h2>
-    <ul>
-      <li><strong>Trading Analysis</strong></li>
-      <li><strong>Investment Analysis</strong></li>
-      <li><strong>Finance Management</strong></li>
-      <li><strong>Company Report Analysis</strong></li>
-      <li><strong>Portfolio Management Techniques</strong></li>
-    </ul>
-  </section>
-
-  <section id="contact" tabindex="-1">
-    <h2>Contact Me</h2>
-    <p>If you want to reach out, please send an email or message via Instagram.</p>
-    <div class="contact-info">
-      <p><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 8l8 5 8-5v-2l-8 5-8-5v2z"/></svg>Email: <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></p>
-      <p><svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M7 2C3.13 2 0 5.13 0 9c0 7 7 13 12 13s12-6 12-13c0-3.87-3.13-7-7-7-1.52 0-2.89.6-3.91 1.56l-.2-.14C8.14 3.1 7.6 3 7 3zM4.5 9c0-2.28 1.72-4.14 3.72-4.14 2.42 0 4.38 2.27 4.38 4.72 0 2.48-2 4.27-4.43 4.27-1.79 0-3.67-1.78-3.67-4.85z"/></svg>Instagram: <a href="https://www.instagram.com/saugatpanta_/profilecard/?igsh=MW0xMmx3NjN6cnVxMQ==" target="_blank" rel="noopener noreferrer">@saugatpanta_</a></p>
-    </div>
-
-    <form id="contact-form" novalidate>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" placeholder="Your name" required />
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" placeholder="Your email" required />
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" rows="4" placeholder="Your message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-</main>
-
-<!-- Tooltip for brain -->
-<div id="tooltip" class="tooltip" role="tooltip" aria-hidden="true"></div>
-
 <script>
-  // Section fade animation
-  function revealOnScroll() {
-    const sections = document.querySelectorAll('section');
-    const windowHeight = window.innerHeight;
-    sections.forEach(section => {
-      const top = section.getBoundingClientRect().top;
-      if (top < windowHeight - 100) {
-        section.classList.add('visible');
-      }
-    });
-  }
-  window.addEventListener('scroll', revealOnScroll);
-  window.addEventListener('load', revealOnScroll);
-
-  // TIME & DATE SCRIPT - Using local device time
+  // ------------- Time & Date -------------------
   function updateNepaliTime() {
     const now = new Date();
-    const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    document.getElementById('nepali-time').textContent = `Nepali Time: ${now.toLocaleTimeString([], options)}`;
+    const options = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    const nepaliTime = now.toLocaleTimeString('ne-NP', options);
+    document.getElementById('nepaliTime').textContent = "Nepali Time: " + nepaliTime;
   }
   function updateEnglishDate() {
     const now = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('english-date').textContent = now.toLocaleDateString('en-US', options);
+    document.getElementById('englishDate').textContent = now.toLocaleDateString('en-US', options);
   }
   updateNepaliTime();
   updateEnglishDate();
   setInterval(updateNepaliTime, 1000);
 
-  // Typing effect for welcome message
-  const typingElement = document.getElementById('typing-welcome');
-  const welcomeText = "Welcome to my personal website!";
-  let typingIndex = 0;
-  function typeWriter() {
-    if (typingIndex < welcomeText.length) {
-      typingElement.textContent += welcomeText.charAt(typingIndex);
-      typingIndex++;
-      setTimeout(typeWriter, 90);
-    }
+  // ----------- 3-dot menu toggle -------------
+  const menuToggle = document.getElementById('menuToggle');
+  const navPopup = document.getElementById('navPopup');
+  let menuOpen = false;
+
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    navPopup.style.display = menuOpen ? 'flex' : 'none';
   }
-  typeWriter();
 
-  // Interactive Brain Tooltip Data
-  const brainInfo = {
-    'frontal-lobe': "Frontal Lobe: Logical thinking, problem-solving, and decision-making skills.",
-    'parietal-lobe': "Parietal Lobe: Medical research interests and analytical skills.",
-    'occipital-lobe': "Occipital Lobe: Visual learning and observation skills.",
-    'temporal-lobe': "Temporal Lobe: Passion for reading and language comprehension."
-  };
-
-  const tooltip = document.getElementById('tooltip');
-  const brainSvg = document.getElementById('brain-svg');
-
-  brainSvg.querySelectorAll('ellipse').forEach(el => {
-    el.addEventListener('mouseenter', (e) => {
-      tooltip.textContent = brainInfo[e.target.id] || "";
-      tooltip.style.opacity = '1';
-      tooltip.setAttribute('aria-hidden', 'false');
-    });
-    el.addEventListener('mousemove', (e) => {
-      tooltip.style.left = (e.pageX + 15) + 'px';
-      tooltip.style.top = (e.pageY + 15) + 'px';
-    });
-    el.addEventListener('mouseleave', () => {
-      tooltip.style.opacity = '0';
-      tooltip.setAttribute('aria-hidden', 'true');
-    });
-  });
-
-  // Timeline expand/collapse
-  const timelineItems = document.querySelectorAll('.timeline-item');
-  timelineItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const descId = item.getAttribute('aria-controls');
-      const desc = document.getElementById(descId);
-      const expanded = item.getAttribute('aria-expanded') === 'true';
-      if (desc) {
-        if (expanded) {
-          desc.hidden = true;
-          item.setAttribute('aria-expanded', 'false');
-        } else {
-          desc.hidden = false;
-          item.setAttribute('aria-expanded', 'true');
-        }
-      }
-    });
-    item.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        item.click();
-        e.preventDefault();
-      }
-    });
-  });
-
-  // Reveal timeline items on scroll
-  function revealTimeline() {
-    const windowHeight = window.innerHeight;
-    timelineItems.forEach(item => {
-      const top = item.getBoundingClientRect().top;
-      if (top < windowHeight - 100) {
-        item.classList.add('visible');
-      }
-    });
-  }
-  window.addEventListener('scroll', revealTimeline);
-  window.addEventListener('load', revealTimeline);
-
-  // Dark/Light mode toggle
-  const modeToggle = document.getElementById('mode-toggle');
-  modeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    if(document.body.classList.contains('dark')) {
-      modeToggle.textContent = '☀️';
-    } else {
-      modeToggle.textContent = '🌙';
+  menuToggle.addEventListener('click', toggleMenu);
+  menuToggle.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
     }
   });
 
-  // Parallax brain rotation on mouse move
-  const brainContainer = document.querySelector('.brain-container');
-  brainContainer.addEventListener('mousemove', (e) => {
-    const rect = brainContainer.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    brainContainer.style.transform = `rotateY(${x / 20}deg) rotateX(${-y / 20}deg)`;
-  });
-  brainContainer.addEventListener('mouseleave', () => {
-    brainContainer.style.transform = 'rotateY(0) rotateX(0)';
-  });
+  // ------------- Starfield animation -------------------
+  const starsCanvas = document.getElementById('stars');
+  const starsCtx = starsCanvas.getContext('2d');
+  const fallingStarsCanvas = document.getElementById('fallingStars');
+  const fallingCtx = fallingStarsCanvas.getContext('2d');
 
-  // Background particles (using canvas, simple)
-  // Minimal implementation to avoid external libs
-  const canvas = document.createElement('canvas');
-  canvas.id = 'particle-canvas';
-  canvas.style.position = 'fixed';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.width = '100vw';
-  canvas.style.height = '100vh';
-  canvas.style.zIndex = '-1';
-  canvas.style.pointerEvents = 'none';
-  document.body.appendChild(canvas);
-  const ctx = canvas.getContext('2d');
+  let stars = [];
+  let fallingStars = [];
 
-  let particlesArray = [];
-  let maxParticles = 80;
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  function initCanvas() {
+    starsCanvas.width = window.innerWidth;
+    starsCanvas.height = window.innerHeight;
+    fallingStarsCanvas.width = window.innerWidth;
+    fallingStarsCanvas.height = window.innerHeight;
   }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
 
-  class Particle {
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  // Star object
+  class Star {
     constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.radius = Math.random() * 2 + 1;
-      this.speedX = (Math.random() - 0.5) * 0.3;
-      this.speedY = (Math.random() - 0.5) * 0.3;
-      this.alpha = Math.random() * 0.5 + 0.2;
+      this.x = Math.random() * starsCanvas.width;
+      this.y = Math.random() * starsCanvas.height;
+      this.radius = Math.random() * 1.1 + 0.3;
+      this.alpha = random(0.3, 1);
+      this.alphaChange = 0.005 * (Math.random() < 0.5 ? 1 : -1);
+      this.color = `rgba(255,255,255,${this.alpha})`;
     }
     update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-
-      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      this.alpha += this.alphaChange;
+      if (this.alpha <= 0.3 || this.alpha >= 1) this.alphaChange *= -1;
+      this.color = `rgba(255,255,255,${this.alpha.toFixed(2)})`;
     }
-    draw() {
+    draw(ctx) {
       ctx.beginPath();
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = 'white';
+      ctx.shadowBlur = 4;
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(45, 78, 100, ${this.alpha})`;
       ctx.fill();
     }
   }
 
-  function initParticles() {
-    particlesArray = [];
-    for(let i=0; i < maxParticles; i++) {
-      particlesArray.push(new Particle());
+  // Falling star object
+  class FallingStar {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * fallingStarsCanvas.width;
+      this.y = random(-100, -10);
+      this.len = random(80, 150);
+      this.speed = random(4, 8);
+      this.angle = Math.PI / 4;
+      this.opacity = 1;
+      this.fadeSpeed = 0.01;
+    }
+    update() {
+      this.x += this.speed * Math.cos(this.angle);
+      this.y += this.speed * Math.sin(this.angle);
+      this.opacity -= this.fadeSpeed;
+      if (this.opacity <= 0) this.reset();
+    }
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(this.x - this.len * Math.cos(this.angle), this.y - this.len * Math.sin(this.angle));
+      ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+      ctx.lineWidth = 2;
+      ctx.shadowColor = 'white';
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+
+      // Bright head of falling star
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+      ctx.shadowColor = 'white';
+      ctx.shadowBlur = 15;
+      ctx.fill();
     }
   }
 
-  function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particlesArray.forEach(p => {
-      p.update();
-      p.draw();
-    });
-    requestAnimationFrame(animateParticles);
+  // Initialize stars
+  function initStars() {
+    stars = [];
+    for(let i=0; i<200; i++) {
+      stars.push(new Star());
+    }
+    fallingStars = [];
+    for(let i=0; i<5; i++) {
+      fallingStars.push(new FallingStar());
+    }
   }
 
-  initParticles();
-  animateParticles();
+  // Animation loop
+  function animate() {
+    starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+    fallingCtx.clearRect(0, 0, fallingStarsCanvas.width, fallingStarsCanvas.height);
 
-  // Contact form animation and confetti effect
-  const contactForm = document.getElementById('contact-form');
+    stars.forEach(star => {
+      star.update();
+      star.draw(starsCtx);
+    });
 
-  // Floating labels effect
-  const inputs = contactForm.querySelectorAll('input, textarea');
-  inputs.forEach(input => {
-    input.addEventListener('focus', e => {
-      e.target.previousElementSibling.style.color = 'var(--secondary-light)';
+    fallingStars.forEach(fstar => {
+      fstar.update();
+      fstar.draw(fallingCtx);
     });
-    input.addEventListener('blur', e => {
-      e.target.previousElementSibling.style.color = '';
-    });
+
+    requestAnimationFrame(animate);
+  }
+
+  // On window resize
+  window.addEventListener('resize', () => {
+    initCanvas();
+    initStars();
   });
 
-  // Confetti on submit
-  function createConfetti() {
-    const confettiContainer = document.createElement('div');
-    confettiContainer.style.position = 'fixed';
-    confettiContainer.style.top = '0';
-    confettiContainer.style.left = '0';
-    confettiContainer.style.width = '100vw';
-    confettiContainer.style.height = '100vh';
-    confettiContainer.style.pointerEvents = 'none';
-    confettiContainer.style.zIndex = '9999';
-    document.body.appendChild(confettiContainer);
-
-    const colors = ['#f44336', '#ffeb3b', '#4caf50', '#2196f3', '#ff9800'];
-
-    for(let i=0; i < 150; i++) {
-      const confetti = document.createElement('div');
-      confetti.style.position = 'absolute';
-      confetti.style.width = '8px';
-      confetti.style.height = '8px';
-      confetti.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
-      confetti.style.top = '50%';
-      confetti.style.left = '50%';
-      confetti.style.opacity = '0.9';
-      confetti.style.borderRadius = '50%';
-      confetti.style.pointerEvents = 'none';
-      confetti.style.transform = `translate(-50%, -50%) rotate(${Math.random()*360}deg)`;
-      confetti.style.animation = `confetti-fall 3s ease forwards`;
-      confetti.style.animationDelay = `${Math.random()*2}s`;
-      confettiContainer.appendChild(confetti);
-    }
-    setTimeout(() => {
-      document.body.removeChild(confettiContainer);
-    }, 3500);
-  }
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Thank you for reaching out! Please contact me via email or Instagram.');
-    createConfetti();
-    contactForm.reset();
-  });
-
-  // Confetti keyframe
-  const styleSheet = document.createElement("style");
-  styleSheet.textContent = `
-  @keyframes confetti-fall {
-    0% {
-      opacity: 0.9;
-      transform: translate(-50%, -50%) translateY(0) rotate(0deg);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(-50%, 600px) rotate(360deg);
-    }
-  }
-  `;
-  document.head.appendChild(styleSheet);
+  // Init on load
+  initCanvas();
+  initStars();
+  animate();
 
 </script>
 
