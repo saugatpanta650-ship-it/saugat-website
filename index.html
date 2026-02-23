@@ -8,12 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* RESET */
 * {margin:0; padding:0; box-sizing:border-box;}
 body {font-family:'Poppins',sans-serif; scroll-behavior:smooth; background:#111; color:#fff;}
 
-/* NAVBAR */
+/* HEADER */
 header {
-position:fixed; top:0; width:100%; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; z-index:1000;
+position:fixed; top:0; width:100%; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px);
+display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; z-index:1000;
 }
 header h1 {color:#00f5ff; font-size:1.4rem;}
 nav a {color:white; margin-left:1.5rem; text-decoration:none; font-weight:500; position:relative;}
@@ -56,7 +58,8 @@ footer {text-align:center; padding:2rem; background:#000; color:#fff;}
 <h1>Saugat Panta</h1>
 <nav>
 <a href="#home">Home</a>
-<a href="#about">CV</a>
+<a href="#about">About Me</a>
+<a href="#cv">CV</a>
 <a href="#contact">Contact</a>
 </nav>
 </header>
@@ -75,21 +78,38 @@ footer {text-align:center; padding:2rem; background:#000; color:#fff;}
 </div>
 </section>
 
-<!-- CV SECTION -->
+<!-- ABOUT ME -->
 <section id="about">
+<h3>About Me</h3>
+<p>I’m <strong>Saugat Panta</strong>, a 2nd-year MBBS student at Gandaki Medical College, passionate about medicine, research, and finance. I continuously strive to expand my knowledge and skills to become a competent future physician and an insightful researcher.</p>
+</section>
+
+<!-- CURRICULUM VITAE -->
+<section id="cv">
 <h3>Curriculum Vitae</h3>
+
+<div class="card">
+<h4>Personal Information</h4>
+<p>Email: <a href="mailto:saugat4727@gmail.com">saugat4727@gmail.com</a></p>
+<p>Instagram: <a href="https://instagram.com/saugatpanta_" target="_blank">@saugatpanta_</a></p>
+</div>
 
 <div class="card">
 <h4>Education</h4>
 <p>MBBS — Gandaki Medical College (2023 – Present)</p>
 <p>+2 — Kathmandu Model Secondary School</p>
-<p>SEE — Future Star High School</p>
-<div class="card">
-<h4>Skills</h4>
-<p>• Data Collection • Market Analysis • Portfolio Strategy</p>
+<p>SEE — Future Star High School (2019)</p>
 </div>
 
-<a href="cv.pdf" class="download-btn" target="_blank">Download Full CV</a>
+<div class="card">
+<h4>Languages</h4>
+<ul>
+<li>Nepali (Native)</li>
+<li>English (Intermediate)</li>
+<li>Hindi (Conversational)</li>
+</ul>
+</div>
+
 </section>
 
 <!-- CONTACT SECTION -->
